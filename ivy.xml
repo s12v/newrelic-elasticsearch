@@ -1,0 +1,7 @@
+<ivy-module version="2.0">
+    <info organisation="apache" module="hello-ivy"/>
+    <dependencies>
+	    <dependency org="io.searchbox" name="jest" rev="0.1.4" />
+    </dependencies>
+</ivy-module>
+

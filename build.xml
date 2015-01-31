@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="elasticsearch" default="dist" basedir=".">
+
+    <property name="version" value="0.0.1" />
+    <property name="filename" value="newrelic-elasticsearch-plugin-${version}"/>
+    <property name="jarfile" value="plugin.jar" />
+    <property name="tarfile" value="${filename}.tar.gz" />
+
+    <property name="build.dir" value="build" />
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+    <property name="build.jar.dir" value="${build.dir}/jar"/>
+    <property name="build.tar.dir" value="${build.dir}/tar"/>
+    <property name="build.tar.src.dir" value="${build.tar.dir}/${filename}"/>
+
+    <property name="src.dir" value="src" />
+    <property name="lib.dir" value="lib" />
+    <property name="conf.dir" value="config" />
+    <property name="dist.dir" location="dist" />
+
+    <property name="sdk.jar" value="${lib.dir}/metrics_publish-2.0.0.jar" />
+
+    <path id="classpath">
+        <pathelement location="${sdk.jar}" />
+    </path>
+
+    <target name="clean">
+        <echo>Cleaning project...</echo>
+        <delete dir="${build.dir}" />
+        <echo>Done.</echo>
+    </target>
+
+    <target name="init" depends="clean">
+        <echo>Creating directory: ${build.dir}</echo>
+        <mkdir dir="${build.dir}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <!--  Compile the java code  -->
+        <echo>Building project...</echo>
+        <mkdir dir="${build.classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" target="1.6" source="1.6">
+            <classpath refid="classpath" />
+        </javac>
+        <echo>Done.</echo>
+    </target>
+
+    <target name="jar" depends="compile" description="create a jar file for the application">
+        <mkdir dir="${build.jar.dir}"/>
+        <tstamp />
+        <jar destfile="${build.jar.dir}/${jarfile}">
+            <manifest>
+                <attribute name="Specification-Title" value="New Relic Elasticsearch Plugin" />
+                <attribute name="Specification-Vendor" value="Sergey Novikov" />
+                <attribute name="Implementation-Vendor" value="Sergey Novikov" />
+                <attribute name="Built-Date" value="${TODAY}" />
+                <attribute name="Specification-Version" value="${version}" />
+                <attribute name="Implementation-Version" value="${version} ${TODAY}" />
+                <attribute name="Main-Class" value="me.snov.newrelic.elasticsearch.Main" />
+            </manifest>
+            <fileset dir="${build.classes.dir}"/>
+            <zipfileset src="${sdk.jar}" />
+        </jar>
+    </target>
+
+    <target name="dist" depends="jar" description="create a downloadable file">
+        <mkdir dir="${build.tar.src.dir}" />
+        <copy todir="${build.tar.src.dir}/config">
+            <fileset dir="${conf.dir}" />
+        </copy>
+        <copy file="${build.jar.dir}/${jarfile}" todir="${build.tar.src.dir}" />
+        <tar compression="gzip" destfile="${dist.dir}/${tarfile}">
+            <tarfileset dir="${build.tar.dir}" />
+        </tar>
+    </target>
+</project>

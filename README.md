@@ -1,0 +1,2 @@
+# Newrelic elasticsearch plugin
+

@@ -1,0 +1,16 @@
+{
+  "agents": [
+    {
+      "name" : "Wikipedia - English",
+      "host" : "en.wikipedia.org"
+    },
+    {
+      "name" : "Wikipedia - French",
+      "host" : "fr.wikipedia.org"
+    },
+    {
+      "name" : "Wikipedia - German",
+      "host" : "de.wikipedia.org"
+    }
+  ]
+}
