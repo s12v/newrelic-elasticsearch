@@ -50,7 +50,7 @@ public class ElasticsearchAgent extends Agent {
 
     private String getClusterName()
     {
-        return clusterStatsParser.getClusterStats().clusterName;
+        return clusterStatsParser.getClusterStats().cluster_name;
     }
 
     @Override

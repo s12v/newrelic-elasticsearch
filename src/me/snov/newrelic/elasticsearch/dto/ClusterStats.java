@@ -1,69 +1,101 @@
 package me.snov.newrelic.elasticsearch.dto;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class ClusterStats {
-    public class Indices {
-        public class Docs {
+    private class Indices {
+        private class Shards {
+            private class Index {
+                private class IdontKnowWhatIsIt {
+                    public Long min;
+                    public Long max;
+                    public Long avg;
+                }
+
+                public IdontKnowWhatIsIt shards;
+                public IdontKnowWhatIsIt primaries;
+                public IdontKnowWhatIsIt replication;
+            }
+
+            public Long total;
+            public Long primaries;
+            public Long replication;
+        }
+        private class Docs {
             public Long count;
             public Long deleted;
         }
-        public class Store {
-            public Long sizeInBytes;
-            public Long throttleTimeInMillis;
+        private class Store {
+            public Long size_in_bytes;
+            public Long throttle_time_in_millis;
         }
-        public class Fielddata {
-            public Long memorySizeInBytes;
+        private class Fielddata {
+            public Long memory_size_in_bytes;
             public Long evictions;
         }
-        public class FilterCache {
-            public Long memorySizeInBytes;
+        private class FilterCache {
+            public Long memory_size_in_bytes;
             public Long evictions;
         }
-        public class IdCache {
-            public Long memorySizeInBytes;
+        private class IdCache {
+            public Long memory_size_in_bytes;
         }
-        public class Completion {
-            public Long sizeInBytes;
+        private class Completion {
+            public Long size_in_bytes;
         }
-        public class Segments {
+        private class Segments {
             public Long count;
-            public Long memoryInBytes;
-            public Long indexwriterMemoryInBytes;
-            public Long indexwriterMaxMemoryInBytes;
-            public Long versionMapMemoryInBytes;
-            public Long fixedBitSetMemoryInBytes;
+            public Long memory_in_bytes;
+            public Long index_writer_memory_in_bytes;
+            public Long index_writer_max_memory_in_bytes;
+            public Long version_map_memory_in_bytes;
+            public Long fixed_bit_set_memory_in_bytes;
         }
-        public class Percolate {
+        private class Percolate {
             public Long total;
-            public Long timeInMillis;
+            public Long time_in_millis;
             public Long current;
-            public Long memorySizeInBytes;
-            public String memorySize;
+            public Long memory_size_in_bytes;
+            public String memory_size;
             public Long queries;
         }
 
         public Long count;
+
+        public Shards shards;
         public Docs docs;
         public Store store;
         public Fielddata fielddata;
-        public FilterCache filterCache;
-        public IdCache isCache;
+        public FilterCache filter_cache;
+        public IdCache id_cache;
         public Completion completion;
         public Segments segments;
         public Percolate percolate;
     }
-    public class Nodes {
-        public class Count {
+
+    private class Nodes {
+        private class Count {
             public Long total;
-            public Long masterOnly;
-            public Long dataOnly;
-            public Long masterData;
+            public Long master_only;
+            public Long data_only;
+            public Long master_data;
             public Long client;
         }
+
+        public Count count;
+        public ArrayList<String> versions;
     }
 
     public String status;
-    public String clusterName;
+    public String cluster_name;
     public Indices indices;
     public Nodes nodes;
-}
 
+    /**
+     * @return true if nodes have different versions
+     */
+    public boolean isVersionMismatch() {
+        return nodes.versions.size() != 0 && new HashSet<>(nodes.versions).size() > 1;
+    }
+}
