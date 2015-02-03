@@ -1,20 +1,20 @@
-package me.snov.newrelic.elasticsearch.dto;
+package me.snov.newrelic.elasticsearch.response;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class NodesStats {
-    private class NodeStats {
-        private class Indices {
-            private class Docs {
+    public static class NodeStats {
+        public static class Indices {
+            public static class Docs {
                 public Long count;
                 public Long deleted;
             }
-            private class Store {
+            public static class Store {
                 public Long size_in_bytes;
                 public Long throttle_time_in_millis;
             }
-            private class Indexing {
+            public static class Indexing {
                 public Long index_total;
                 public Long index_time_in_millis;
                 public Long index_current;
@@ -22,10 +22,10 @@ public class NodesStats {
                 public Long delete_time_in_millis;
                 public Long delete_current;
                 public Long noop_update_total;
-                public Long is_throttled;
+                public Boolean is_throttled;
                 public Long throttle_time_in_millis;
             }
-            private class Get {
+            public static class Get {
                 public Long total;
                 public Long time_in_millis;
                 public Long exists_total;
@@ -34,7 +34,7 @@ public class NodesStats {
                 public Long missing_time_in_millis;
                 public Long current;
             }
-            private class Search {
+            public static class Search {
                 public Long open_contexts;
                 public Long query_total;
                 public Long query_time_in_millis;
@@ -43,7 +43,7 @@ public class NodesStats {
                 public Long fetch_time_in_millis;
                 public Long fetch_current;
             }
-            private class Merges {
+            public static class Merges {
                 public Long current;
                 public Long current_docs;
                 public Long current_size_in_bytes;
@@ -52,31 +52,31 @@ public class NodesStats {
                 public Long total_docs;
                 public Long total_size_in_bytes;
             }
-            private class Refresh {
+            public static class Refresh {
                 public Long total;
                 public Long total_time_in_millis;
             }
-            private class Flush {
+            public static class Flush {
                 public Long total;
                 public Long total_time_in_millis;
             }
-            private class Warmer {
+            public static class Warmer {
                 public Long current;
                 public Long total;
                 public Long total_time_in_millis;
             }
-            private class FilterCache {
+            public static class FilterCache {
                 public Long memory_size_in_bytes;
                 public Long evictions;
             }
-            private class IdCache {
+            public static class IdCache {
                 public Long memory_size_in_bytes;
             }
-            private class Fielddata {
+            public static class Fielddata {
                 public Long memory_size_in_bytes;
                 public Long evictions;
             }
-            private class Percolate {
+            public static class Percolate {
                 public Long total;
                 public Long time_in_millis;
                 public Long current;
@@ -84,10 +84,10 @@ public class NodesStats {
                 public String memory_size;
                 public Long queries;
             }
-            private class Completion {
+            public static class Completion {
                 public Long size_in_bytes;
             }
-            private class Segments {
+            public static class Segments {
                 public Long count;
                 public Long memory_in_bytes;
                 public Long index_writer_memory_in_bytes;
@@ -95,16 +95,16 @@ public class NodesStats {
                 public Long version_map_memory_in_bytes;
                 public Long fixed_bit_set_memory_in_bytes;
             }
-            private class Translog {
+            public static class Translog {
                 public Long operations;
                 public Long size_in_bytes;
             }
-            private class Suggest {
+            public static class Suggest {
                 public Long total;
                 public Long time_in_millis;
                 public Long current;
             }
-            private class QueryCache {
+            public static class QueryCache {
                 public Long memory_size_in_bytes;
                 public Long evictions;
                 public Long hit_count;
@@ -136,15 +136,15 @@ public class NodesStats {
             public Suggest suggest;
             public QueryCache query_cache;
         }
-        private class Os {
-            private class Cpu {
+        public static class Os {
+            public static class Cpu {
                 public Long sys;
                 public Long user;
                 public Long idle;
                 public Long usage;
                 public Long stolen;
             }
-            private class Mem {
+            public static class Mem {
                 public Long free_in_bytes;
                 public Long used_in_bytes;
                 public Long free_percent;
@@ -152,7 +152,7 @@ public class NodesStats {
                 public Long actual_free_in_bytes;
                 public Long actual_used_in_bytes;
             }
-            private class Swap {
+            public static class Swap {
                 public Long used_in_bytes;
                 public Long free_in_bytes;
             }
@@ -163,14 +163,14 @@ public class NodesStats {
             public Mem mem;
             public Swap swap;
         }
-        private class Process {
-            private class Cpu {
+        public static class Process {
+            public static class Cpu {
                 public Long percent;
                 public Long sys_in_millis;
                 public Long user_in_millis;
                 public Long total_in_millis;
             }
-            private class Mem {
+            public static class Mem {
                 public Long resident_in_bytes;
                 public Long share_in_bytes;
                 public Long total_virtual_in_bytes;
@@ -181,16 +181,16 @@ public class NodesStats {
             public Mem mem;
 
         }
-        private class Jvm {
-            private class Mem {
+        public static class Jvm {
+            public static class Mem {
                 public Long heap_used_in_bytes;
                 public Long heap_used_percent;
                 public Long heap_committed_in_bytes;
                 public Long non_heap_used_in_bytes;
                 public Long non_heap_committed_in_bytes;
             }
-            private class Pools {
-                private class PoolStats {
+            public static class Pools {
+                public static class PoolStats {
                     public Long used_in_bytes;
                     public Long max_in_bytes;
                     public Long peak_used_in_bytes;
@@ -201,22 +201,24 @@ public class NodesStats {
                 public PoolStats survivor;
                 public PoolStats old;
             }
-            private class Threads {
+            public static class Threads {
                 public Long count;
                 public Long peak_count;
             }
-            private class Gc {
-                private class GcCollector {
-                    public Long collection_count;
-                    public Long collection_time_in_millis;
-                }
+            public static class Gc {
+                public static class GcCollectors {
+                    public static class GcCollector {
+                        public Long collection_count;
+                        public Long collection_time_in_millis;
+                    }
 
-                public GcCollector young;
-                // todo survivor?
-                public GcCollector old;
+                    public GcCollector young;
+                    public GcCollector old;
+                }
+                public GcCollectors collectors;
             }
-            private class BufferPools {
-                private class BufferPoolStats {
+            public static class BufferPools {
+                public static class BufferPoolStats {
                     public Long count;
                     public Long used_in_bytes;
                     public Long total_capacity_in_bytes;
@@ -233,8 +235,8 @@ public class NodesStats {
             public Gc gc;
             public BufferPools buffer_pools;
         }
-        private class ThreadPool {
-            private class ThreadPoolStats {
+        public static class ThreadPool {
+            public static class ThreadPoolStats {
                 public Long threads;
                 public Long queue;
                 public Long active;
@@ -260,8 +262,8 @@ public class NodesStats {
             public ThreadPoolStats management;
             public ThreadPoolStats refresh;
         }
-        private class Network {
-            private class Tcp {
+        public static class Network {
+            public static class Tcp {
                 public Long active_opens;
                 public Long passive_opens;
                 public Long curr_estab;
@@ -276,8 +278,8 @@ public class NodesStats {
 
             public Tcp tcp;
         }
-        private class Fs {
-            private class FsTotal {
+        public static class Fs {
+            public static class FsTotal {
                 public Long total_in_bytes;
                 public Long free_in_bytes;
                 public Long available_in_bytes;
@@ -288,7 +290,7 @@ public class NodesStats {
                 public Long disk_write_size_in_bytes;
                 public Long disk_io_size_in_bytes;
             }
-            private class FsData {
+            public static class FsData {
                 public String path;
                 public String mount;
                 public String dev;
@@ -306,19 +308,19 @@ public class NodesStats {
             public FsTotal total;
             public ArrayList<FsData> data;
         }
-        private class Transport {
+        public static class Transport {
            public Long server_open;
            public Long rx_count;
            public Long rx_size_in_bytes;
            public Long tx_count;
            public Long tx_size_in_bytes;
         }
-        private class Http {
+        public static class Http {
             public Long current_open;
             public Long total_opened;
         }
-        private class Breakers {
-            private class BreakerStats {
+        public static class Breakers {
+            public static class BreakerStats {
                 public Long limit_size_in_bytes;
                 public String limit_size;
                 public Long estimated_size_in_bytes;
@@ -335,7 +337,7 @@ public class NodesStats {
         public String name;
         public Indices indices;
         public Os os;
-        public Process processs;
+        public Process process;
         public Jvm jvm;
         public ThreadPool thread_pool;
         public Network network;

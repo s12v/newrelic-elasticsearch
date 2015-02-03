@@ -1,50 +1,49 @@
-package me.snov.newrelic.elasticsearch.dto;
+package me.snov.newrelic.elasticsearch.response;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class ClusterStats {
-    private class Indices {
-        private class Shards {
-            private class Index {
-                private class IdontKnowWhatIsIt {
+    public static class Indices {
+        public static class Shards {
+            public static class Index {
+                public static class IndexStats {
                     public Long min;
                     public Long max;
                     public Long avg;
                 }
 
-                public IdontKnowWhatIsIt shards;
-                public IdontKnowWhatIsIt primaries;
-                public IdontKnowWhatIsIt replication;
+                public IndexStats shards;
+                public IndexStats primaries;
+                public IndexStats replication;
             }
 
             public Long total;
             public Long primaries;
             public Long replication;
         }
-        private class Docs {
+        public static class Docs {
             public Long count;
             public Long deleted;
         }
-        private class Store {
+        public static class Store {
             public Long size_in_bytes;
             public Long throttle_time_in_millis;
         }
-        private class Fielddata {
+        public static class Fielddata {
             public Long memory_size_in_bytes;
             public Long evictions;
         }
-        private class FilterCache {
+        public static class FilterCache {
             public Long memory_size_in_bytes;
             public Long evictions;
         }
-        private class IdCache {
+        public static class IdCache {
             public Long memory_size_in_bytes;
         }
-        private class Completion {
+        public static class Completion {
             public Long size_in_bytes;
         }
-        private class Segments {
+        public static class Segments {
             public Long count;
             public Long memory_in_bytes;
             public Long index_writer_memory_in_bytes;
@@ -52,7 +51,7 @@ public class ClusterStats {
             public Long version_map_memory_in_bytes;
             public Long fixed_bit_set_memory_in_bytes;
         }
-        private class Percolate {
+        public static class Percolate {
             public Long total;
             public Long time_in_millis;
             public Long current;
@@ -74,8 +73,8 @@ public class ClusterStats {
         public Percolate percolate;
     }
 
-    private class Nodes {
-        private class Count {
+    public static class Nodes {
+        public static class Count {
             public Long total;
             public Long master_only;
             public Long data_only;
@@ -91,11 +90,4 @@ public class ClusterStats {
     public String cluster_name;
     public Indices indices;
     public Nodes nodes;
-
-    /**
-     * @return true if nodes have different versions
-     */
-    public boolean isVersionMismatch() {
-        return nodes.versions.size() != 0 && new HashSet<>(nodes.versions).size() > 1;
-    }
 }

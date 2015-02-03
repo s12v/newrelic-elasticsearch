@@ -2,6 +2,8 @@
     <info organisation="apache" module="hello-ivy"/>
     <dependencies>
         <dependency org="com.google.code.gson" name="gson" rev="2.3.1" />
+        <dependency org="junit" name="junit" rev="4.12" />
+        <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3" />
     </dependencies>
 </ivy-module>
 

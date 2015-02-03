@@ -1,21 +1,19 @@
 package me.snov.newrelic.elasticsearch.service;
 
-import me.snov.newrelic.elasticsearch.dto.NodesStats;
+import me.snov.newrelic.elasticsearch.response.NodesStats;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class NodesStatsParser extends AbstractParser {
+public class NodesStatsParser extends AbstractParser<NodesStats> {
 
-    private static final String URL_CLUSTER_STATS = "_nodes/stats";
-    private final URL nodesStatsUrl;
+    private static final String URL_CLUSTER_STATS = "/_nodes/stats";
 
-    public NodesStatsParser(String host, Integer port) throws MalformedURLException {
-        this.nodesStatsUrl = new URL(HTTP, host, port, URL_CLUSTER_STATS);
+    public NodesStatsParser() {
+        super(NodesStats.class, null);
     }
 
-    public NodesStats getNodesStats()
-    {
-        return getGsonResponse(nodesStatsUrl, NodesStats.class);
+    public NodesStatsParser(String host, Integer port) throws MalformedURLException {
+        super(NodesStats.class, new URL(HTTP, host, port, URL_CLUSTER_STATS));
     }
 }
