@@ -52,7 +52,7 @@
         <mkdir dir="${test.build.dir}" />
     </target>
 
-    <target name="resolve" depends="download-ivy" description="Retrieve dependencies with ivy">
+    <target name="resolve" depends="init-ivy" description="Retrieve dependencies with ivy">
         <ivy:resolve/>
     </target>
 
