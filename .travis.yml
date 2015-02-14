@@ -1,0 +1,22 @@
+language: java
+
+jdk:
+  - openjdk6
+  - openjdk7
+  - openjdk8
+  - oraclejdk7
+  - oraclejdk8
+
+script:
+  - ant
+
+deploy:
+    provider: releases
+    api-key:
+      secure: "R8Q/pW53GXC3fHVIe3fqhvweukdJNph0mtCV3vnMLj3Vrt8V33l8DgKvGfxrwh+bsd/v1lr01K5/rWijDsrWMd/8boAVcsJCIYwVS3C6dPxEb0lww5oThl1EHHM3/wM4FQLefbK8/KnTK8qWGSQmwLsX1M+Ehdy4QU9SfO28Ks4="
+    file: "$(ls $TRAVIS_BUILD_DIR/distt/newrelic-elasticsearch-plugin.tar.gz | head -n 1)"
+    skip_cleanup: true
+    on:
+        tags: true
+        all_branches: true
+        condition: $TRAVIS_JDK_VERSION = openjdk6
