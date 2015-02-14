@@ -52,11 +52,11 @@
         <mkdir dir="${test.build.dir}" />
     </target>
 
-    <target name="resolve" depends="init-ivy" description="Retrieve dependencies with ivy">
-        <ivy:resolve/>
+    <target name="retrieve" depends="init-ivy" description="Retrieve dependencies with ivy">
+        <ivy:retrieve/>
     </target>
 
-    <target name="compile" depends="init, resolve">
+    <target name="compile" depends="init, retrieve">
         <echo>Building project...</echo>
         <mkdir dir="${main.build.classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${main.build.classes.dir}" includeantruntime="false" target="1.7" source="1.7">
