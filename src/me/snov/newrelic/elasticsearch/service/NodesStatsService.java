@@ -20,19 +20,19 @@ public class NodesStatsService {
         if (nodesStats != null && nodesStats.nodes != null) {
             for (NodesStats.NodeStats nodeStats : nodesStats.nodes.values()) {
                 if (nodeStats.indices.search.query_total != null) {
-                    result.search += nodeStats.indices.search.query_total;
+                    result.search += nodeStats.indices.search.query_total.longValue();
                 }
                 if (nodeStats.indices.search.fetch_total != null) {
-                    result.fetch += nodeStats.indices.search.fetch_total;
+                    result.fetch += nodeStats.indices.search.fetch_total.longValue();
                 }
                 if (nodeStats.indices.get.total != null) {
-                    result.get += nodeStats.indices.get.total;
+                    result.get += nodeStats.indices.get.total.longValue();
                 }
                 if (nodeStats.indices.indexing.index_total != null) {
-                    result.index += nodeStats.indices.indexing.index_total;
+                    result.index += nodeStats.indices.indexing.index_total.longValue();
                 }
                 if (nodeStats.indices.indexing.delete_total != null) {
-                    result.delete += nodeStats.indices.indexing.delete_total;
+                    result.delete += nodeStats.indices.indexing.delete_total.longValue();
                 }
             }
         }

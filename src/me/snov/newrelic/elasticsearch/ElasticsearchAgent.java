@@ -18,7 +18,7 @@ import java.util.Map;
 public class ElasticsearchAgent extends Agent {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "1.1.0";
+    private static final String VERSION = "1.2.0";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
@@ -310,14 +310,14 @@ public class ElasticsearchAgent extends Agent {
 
         // Swap usage
         // Component/V1/NodeStats/Os/Swap/Percent/*
-        Long swap_used = 0l;
+        Long swapUsed = 0l;
         if (nodeStats.os.swap.used_in_bytes != null && nodeStats.os.swap.free_in_bytes != null) {
-            Long swap_total = nodeStats.os.swap.used_in_bytes + nodeStats.os.swap.free_in_bytes;
-            swap_used = swap_total > 0
-                ? nodeStats.os.swap.used_in_bytes / swap_total
+            Long swapTotal = nodeStats.os.swap.used_in_bytes.longValue() + nodeStats.os.swap.free_in_bytes.longValue();
+            swapUsed = swapTotal > 0
+                ? nodeStats.os.swap.used_in_bytes.longValue() / swapTotal
                 : 0;
         }
-        reportNodeMetric("V1/NodeStats/Os/Swap/Percent", "percent", nodeName, swap_used);
+        reportNodeMetric("V1/NodeStats/Os/Swap/Percent", "percent", nodeName, swapUsed);
 
 
         /******************* JVM *******************/
@@ -509,15 +509,15 @@ public class ElasticsearchAgent extends Agent {
         reportProcessedMetric("V1/QueriesPerSecond/Delete", "requests/second", queriesStat.delete);
 
         /******************* Max heap used, % *******************/
-        Long max_heap_percent = 0l;
+        int maxHeapPercent = 0;
         for (NodesStats.NodeStats nodeStats : nodesStats.nodes.values()) {
-            if (nodeStats.jvm.mem.heap_used_percent > max_heap_percent) {
-                max_heap_percent = nodeStats.jvm.mem.heap_used_percent;
+            if (nodeStats.jvm.mem.heap_used_percent.intValue() > maxHeapPercent) {
+                maxHeapPercent = nodeStats.jvm.mem.heap_used_percent.intValue();
             }
         }
         // Max heap used, %
         // Component/V1/Summary/Jvm/Mem/MaxHeapUsedPercent
-        reportMetric("V1/Summary/Jvm/Mem/MaxHeapUsedPercent", "percent",  max_heap_percent);
+        reportMetric("V1/Summary/Jvm/Mem/MaxHeapUsedPercent", "percent",  maxHeapPercent);
 
     }
 

@@ -29,7 +29,7 @@ public class NodesStatsParserTest {
     public void testV134() throws Exception {
         NodesStats nodesStats = parseJson("/resources/nodes_stats_1.3.4.json");
         assertEquals(3, nodesStats.nodes.size());
-        assertEquals((Long) 200l, nodesStats.nodes.get("lNFk2gshR5GVDPmRrnDyoA")
-            .jvm.gc.collectors.young.collection_time_in_millis);
+        assertEquals(200l, nodesStats.nodes.get("lNFk2gshR5GVDPmRrnDyoA")
+            .jvm.gc.collectors.young.collection_time_in_millis.longValue());
     }
 }

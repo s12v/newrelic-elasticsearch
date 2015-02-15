@@ -7,9 +7,9 @@ public class ClusterStats {
         public static class Shards {
             public static class Index {
                 public static class IndexStats {
-                    public Long min;
-                    public Long max;
-                    public Long avg;
+                    public Number min;
+                    public Number max;
+                    public Number avg;
                 }
 
                 public IndexStats shards;
@@ -17,50 +17,50 @@ public class ClusterStats {
                 public IndexStats replication;
             }
 
-            public Long total;
-            public Long primaries;
-            public Long replication;
+            public Number total;
+            public Number primaries;
+            public Number replication;
         }
         public static class Docs {
-            public Long count;
-            public Long deleted;
+            public Number count;
+            public Number deleted;
         }
         public static class Store {
-            public Long size_in_bytes;
-            public Long throttle_time_in_millis;
+            public Number size_in_bytes;
+            public Number throttle_time_in_millis;
         }
         public static class Fielddata {
-            public Long memory_size_in_bytes;
-            public Long evictions;
+            public Number memory_size_in_bytes;
+            public Number evictions;
         }
         public static class FilterCache {
-            public Long memory_size_in_bytes;
-            public Long evictions;
+            public Number memory_size_in_bytes;
+            public Number evictions;
         }
         public static class IdCache {
-            public Long memory_size_in_bytes;
+            public Number memory_size_in_bytes;
         }
         public static class Completion {
-            public Long size_in_bytes;
+            public Number size_in_bytes;
         }
         public static class Segments {
-            public Long count;
-            public Long memory_in_bytes;
-            public Long index_writer_memory_in_bytes;
-            public Long index_writer_max_memory_in_bytes;
-            public Long version_map_memory_in_bytes;
-            public Long fixed_bit_set_memory_in_bytes;
+            public Number count;
+            public Number memory_in_bytes;
+            public Number index_writer_memory_in_bytes;
+            public Number index_writer_max_memory_in_bytes;
+            public Number version_map_memory_in_bytes;
+            public Number fixed_bit_set_memory_in_bytes;
         }
         public static class Percolate {
-            public Long total;
-            public Long time_in_millis;
-            public Long current;
-            public Long memory_size_in_bytes;
+            public Number total;
+            public Number time_in_millis;
+            public Number current;
+            public Number memory_size_in_bytes;
             public String memory_size;
-            public Long queries;
+            public Number queries;
         }
 
-        public Long count;
+        public Number count;
 
         public Shards shards;
         public Docs docs;
@@ -75,11 +75,11 @@ public class ClusterStats {
 
     public static class Nodes {
         public static class Count {
-            public Long total;
-            public Long master_only;
-            public Long data_only;
-            public Long master_data;
-            public Long client;
+            public Number total;
+            public Number master_only;
+            public Number data_only;
+            public Number master_data;
+            public Number client;
         }
 
         public Count count;

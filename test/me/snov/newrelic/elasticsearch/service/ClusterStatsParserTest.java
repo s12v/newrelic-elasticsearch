@@ -29,7 +29,7 @@ public class ClusterStatsParserTest {
     public void testV142() throws Exception {
         ClusterStats clusterStats = parseJson("/resources/cluster_stats_1.4.2.json");
         assertEquals("elasticsearch_snov", clusterStats.cluster_name);
-        assertEquals((Long)1601396l, clusterStats.indices.segments.memory_in_bytes);
-        assertEquals((Long)1l, clusterStats.nodes.count.total);
+        assertEquals(1601396l, clusterStats.indices.segments.memory_in_bytes.longValue());
+        assertEquals(1l, clusterStats.nodes.count.total.longValue());
     }
 }
