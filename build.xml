@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project name="elasticsearch" default="dist" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
-    <property name="version" value="0.0.1" />
+    <property name="version" value="0.4.0" />
     <property name="filename" value="newrelic-elasticsearch-plugin-${version}"/>
     <property name="jarfile" value="plugin.jar" />
     <property name="tarfile" value="${filename}.tar.gz" />
@@ -13,7 +13,6 @@
     <property name="main.build.tar.src.dir" value="${main.build.tar.dir}/${filename}"/>
 
     <property name="test.src.dir" location="test"/>
-
     <property name="test.build.dir" value="build/test" />
     <property name="test.build.classes.dir" value="${test.build.dir}/classes" />
     <property name="test.reports.dir" location="${test.build.dir}/reports"/>
