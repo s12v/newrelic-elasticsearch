@@ -18,7 +18,7 @@ import java.util.Map;
 public class ElasticsearchAgent extends Agent {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "0.4.0";
+    private static final String VERSION = "0.9.0";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
@@ -56,7 +56,7 @@ public class ElasticsearchAgent extends Agent {
     }
 
     @Override
-    public String getComponentHumanLabel() {
+    public String getAgentName() {
         return clusterName;
     }
 
@@ -78,10 +78,6 @@ public class ElasticsearchAgent extends Agent {
         reportMetric("V1/ClusterStats/Indices/Docs/Count", "documents", clusterStats.indices.docs.count);
         reportMetric("V1/ClusterStats/Indices/Docs/Deleted", "documents", clusterStats.indices.docs.deleted);
 
-        // Component/V1/ClusterStats/Indices/DocsAdded
-        reportProcessedMetric("V1/ClusterStats/Indices/DocsAdded", "documents/second",
-            clusterStats.indices.docs.count);
-
         // Nodes (table)
         // Component/V1/ClusterStats/Nodes/Count/*
         reportMetric("V1/ClusterStats/Nodes/Count/Total", "nodes", clusterStats.nodes.count.total);
@@ -91,29 +87,22 @@ public class ElasticsearchAgent extends Agent {
         reportMetric("V1/ClusterStats/Nodes/Count/Client", "nodes", clusterStats.nodes.count.client);
 
         // Indices and Shards (table)
-        // Component/V1/ClusterStats/Indices/*
-        reportMetric("V1/ClusterStats/Indices/Indices", "indices", clusterStats.indices.count);
-        reportMetric("V1/ClusterStats/Indices/Shards", "shards", clusterStats.indices.shards.total);
-        reportMetric("V1/ClusterStats/Indices/Primaries", "shards", clusterStats.indices.shards.total);
-        reportMetric("V1/ClusterStats/Indices/Replication", "shards", clusterStats.indices.shards.replication);
+        // Component/V1/ClusterStats/Indices/Group1/*
+        reportMetric("V1/ClusterStats/Indices/Group1/Indices", "indices", clusterStats.indices.count);
+        reportMetric("V1/ClusterStats/Indices/Group1/Shards", "shards", clusterStats.indices.shards.total);
+        reportMetric("V1/ClusterStats/Indices/Group1/Primaries", "shards", clusterStats.indices.shards.total);
+        reportMetric("V1/ClusterStats/Indices/Group1/Replication", "shards", clusterStats.indices.shards.replication);
 
-        // ClusterStats/Indices/Segments/Count
+        // Component/V1/ClusterStats/Indices/Segments/Count
         reportMetric("V1/ClusterStats/Indices/Segments/Count", "segments", clusterStats.indices.segments.count);
 
         // Component/V1/ClusterStats/Indices/Store/Size
         reportMetric("V1/ClusterStats/Indices/Store/Size", "bytes", clusterStats.indices.store.size_in_bytes);
 
-        // Component/V1/ClusterStats/Indices/Store/SizePerSec
-        reportProcessedMetric("V1/ClusterStats/Indices/Store/SizePerSec", "bytes/second",
-            clusterStats.indices.store.size_in_bytes);
-
-        // Component/V1/ClusterStats/Indices/Store/ThrottleTime
-        reportProcessedMetric("V1/ClusterStats/Indices/Store/ThrottleTime", "millis",
-            clusterStats.indices.store.throttle_time_in_millis);
 
         /******************* Summary *******************/
 
-        // Component/V1/ClusterStats/Nodes/VersionMismatch
+        // Component/V1/ClusterStats/NumberOfVersionsInCluster
         reportMetric("V1/ClusterStats/NumberOfVersionsInCluster", "versions",
             clusterStatsService.getNumberOfVersionsInCluster(clusterStats));
     }
@@ -133,11 +122,6 @@ public class ElasticsearchAgent extends Agent {
         reportNodeMetric("V1/NodeStats/Indices/Store/Size", "bytes", nodeName,
             nodeStats.indices.store.size_in_bytes);
 
-        // Store writes
-        // Component/V1/NodeStats/Indices/Store/SizePerSec/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Store/SizePerSec", "bytes/second", nodeName,
-            nodeStats.indices.store.size_in_bytes);
-
         // Deleted documents
         // Component/V1/NodeStats/Nodes/Indices/Docs/Deleted/*
         reportNodeMetric("V1/NodeStats/Nodes/Indices/Docs/Deleted", "documents", nodeName,
@@ -147,52 +131,52 @@ public class ElasticsearchAgent extends Agent {
 
         // Index
         // Component/V1/NodeStats/Indices/Indexing/Index/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/Index", "queries", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/Index", "operations/second", nodeName,
             nodeStats.indices.indexing.index_total);
 
         // Index time
         // Component/V1/NodeStats/Indices/Indexing/IndexTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/IndexTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/IndexTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.indexing.index_time_in_millis);
 
         // Delete
         // Component/V1/NodeStats/Indices/Indexing/DeleteTotal/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/DeleteTotal", "queries", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/DeleteTotal", "operations/second", nodeName,
             nodeStats.indices.indexing.delete_total);
 
         // Delete time
         // Component/V1/NodeStats/Indices/Indexing/DeleteTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/DeleteTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/DeleteTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.indexing.delete_time_in_millis);
 
         // Refresh
         // Component/V1/NodeStats/Indices/Refresh/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/Total", "refreshes", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/Total", "operations/second", nodeName,
             nodeStats.indices.refresh.total);
 
         // Refresh time
         // Component/V1/NodeStats/Indices/Refresh/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/TotalTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/TotalTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.refresh.total_time_in_millis);
 
         // Flush
         // Component/V1/NodeStats/Indices/Flush/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/Total", "flushes", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/Total", "operations/second", nodeName,
             nodeStats.indices.flush.total);
 
         // Flush time
         // Component/V1/NodeStats/Indices/Flush/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/TotalTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/TotalTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.flush.total_time_in_millis);
 
         // Warmer
         // Component/V1/NodeStats/Indices/Warmer/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/Total", "queries", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/Total", "operations/second", nodeName,
             nodeStats.indices.warmer.total);
 
         // Warmer time
         // Component/V1/NodeStats/Indices/Warmer/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/TotalTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/TotalTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.warmer.total_time_in_millis);
 
 
@@ -200,42 +184,42 @@ public class ElasticsearchAgent extends Agent {
 
         // Query
         // Component/V1/NodeStats/Indices/Search/QueryTotal/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/QueryTotal", "requests", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/QueryTotal", "requests/second", nodeName,
             nodeStats.indices.search.query_total);
 
         // Query time
         // Component/V1/NodeStats/Indices/Search/QueryTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/QueryTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/QueryTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.search.query_time_in_millis);
 
         // Fetch
         // Component/V1/NodeStats/Indices/Search/FetchTotal/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/FetchTotal", "requests", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/FetchTotal", "requests/second", nodeName,
             nodeStats.indices.search.fetch_total);
 
         // Fetch time
         // Component/V1/NodeStats/Indices/Search/FetchTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/FetchTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Search/FetchTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.search.fetch_time_in_millis);
 
         // Get
         // Component/V1/NodeStats/Indices/Get/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Get/Total", "requests", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Get/Total", "requests/second", nodeName,
             nodeStats.indices.get.total);
 
         // Get time
         // Component/V1/NodeStats/Indices/Get/TimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Get/TimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Get/TimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.get.time_in_millis);
 
         // Suggest
         // Component/V1/NodeStats/Indices/Suggest/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/Total", "requests", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/Total", "requests/second", nodeName,
             nodeStats.indices.suggest.total);
 
-        // Suggest
+        // Suggest time
         // Component/V1/NodeStats/Indices/Suggest/TimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/TimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/TimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.suggest.time_in_millis);
 
 
@@ -243,27 +227,27 @@ public class ElasticsearchAgent extends Agent {
 
         // Merges
         // Component/V1/NodeStats/Indices/Merges/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/Total", "merges", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/Total", "merges/second", nodeName,
             nodeStats.indices.merges.total);
 
-        // Size
+        // Merge size
         // Component/V1/NodeStats/Indices/Merges/TotalSizeInBytes/*
         reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalSizeInBytes", "bytes/second", nodeName,
             nodeStats.indices.merges.total_size_in_bytes);
 
-        // Time
+        // Merge time
         // Component/V1/NodeStats/Indices/Merges/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.merges.total_time_in_millis);
 
-        // Docs
+        // Merged docs
         // Component/V1/NodeStats/Indices/Merges/TotalDocs/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalDocs", "docs", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalDocs", "docs/second", nodeName,
             nodeStats.indices.merges.total_docs);
 
-        // Segments
+        // Merged segments
         // Component/V1/NodeStats/Indices/Segments/Count/*
-        reportNodeMetric("V1/NodeStats/Indices/Segments/Count", "segments", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Segments/Count", "segments/second", nodeName,
             nodeStats.indices.segments.count);
 
 
@@ -276,7 +260,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Filter evictions
         // Component/V1/NodeStats/Indices/FilterCache/Evictions/*
-        reportNodeMetric("V1/NodeStats/Indices/FilterCache/Evictions", "evictions", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/FilterCache/Evictions", "evictions/second", nodeName,
             nodeStats.indices.filter_cache.evictions);
 
         // Field data
@@ -286,7 +270,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Field evictions
         // Component/V1/NodeStats/Indices/Fielddata/Evictions/*
-        reportNodeMetric("V1/NodeStats/Indices/Fielddata/Evictions", "evictions", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Fielddata/Evictions", "evictions/second", nodeName,
             nodeStats.indices.fielddata.evictions);
 
         // Id cache
@@ -299,17 +283,23 @@ public class ElasticsearchAgent extends Agent {
         reportNodeMetric("V1/NodeStats/Indices/Completion/Size", "bytes", nodeName,
             nodeStats.indices.completion.size_in_bytes);
 
-        /******************* JVM & System *******************/
 
-        // Heap used, %
-        // Component/V1/NodeStats/Jvm/Mem/HeapUsedPercent/*
-        reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedPercent", "percent", nodeName,
-            nodeStats.jvm.mem.heap_used_percent);
+        /******************* System *******************/
 
         // CPU used, %
-        // Component/V1/NodeStats/Process/Cpu/Percent/*
-        reportNodeMetric("V1/NodeStats/Process/Cpu/Percent", "percent", nodeName,
-            nodeStats.process.cpu.percent);
+        // Component/V1/NodeStats/Os/Cpu/Usage/*
+        reportNodeMetric("V1/NodeStats/Os/Cpu/Usage", "percent", nodeName,
+            nodeStats.os.cpu.usage);
+
+        // Memory used, %
+        // Component/V1/NodeStats/Os/Mem/UsedPercent/*
+        reportNodeMetric("V1/NodeStats/Os/Mem/UsedPercent", "percent", nodeName,
+            nodeStats.os.mem.used_percent);
+
+        // Memory used
+        // Component/V1/NodeStats/Os/Mem/UsedInBytes/*
+        reportNodeMetric("V1/NodeStats/Os/Mem/UsedInBytes", "bytes", nodeName,
+            nodeStats.os.mem.used_in_bytes);
 
         // Load average
         // Component/V1/NodeStats/Os/LoadAverage/*
@@ -318,46 +308,65 @@ public class ElasticsearchAgent extends Agent {
                 nodeStats.os.load_average.get(0));
         }
 
-        // GC collections (old)
-        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionCount/*
-        reportNodeProcessedMetric("NodeStats/Jvm/Gc/Old/CollectionCount", "collections", nodeName,
-            nodeStats.jvm.gc.collectors.old.collection_count);
-
-        // GC collection time (old)
-        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionTime/*
-        reportNodeProcessedMetric("NodeStats/Jvm/Gc/Old/CollectionTime", "milliseconds", nodeName,
-            nodeStats.jvm.gc.collectors.old.collection_time_in_millis);
-
-        // GC collections (young)
-        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionCount/*
-        reportNodeProcessedMetric("NodeStats/Jvm/Gc/Young/CollectionCount", "collections", nodeName,
-            nodeStats.jvm.gc.collectors.young.collection_count);
-
-        // GC collection time (young)
-        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionTime/*
-        reportNodeProcessedMetric("NodeStats/Jvm/Gc/Young/CollectionTime", "milliseconds", nodeName,
-            nodeStats.jvm.gc.collectors.young.collection_time_in_millis);
-
-        // Swap usage, %
+        // Swap usage
         // Component/V1/NodeStats/Os/Swap/Percent/*
         Long swap_used = 0l;
         if (nodeStats.os.swap.used_in_bytes != null && nodeStats.os.swap.free_in_bytes != null) {
             Long swap_total = nodeStats.os.swap.used_in_bytes + nodeStats.os.swap.free_in_bytes;
-            swap_used = nodeStats.os.swap.used_in_bytes / swap_total;
+            swap_used = swap_total > 0
+                ? nodeStats.os.swap.used_in_bytes / swap_total
+                : 0;
         }
         reportNodeMetric("V1/NodeStats/Os/Swap/Percent", "percent", nodeName, swap_used);
 
+
+        /******************* JVM *******************/
+
+        // Heap used, %
+        // Component/V1/NodeStats/Jvm/Mem/HeapUsedPercent/*
+        reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedPercent", "percent", nodeName,
+            nodeStats.jvm.mem.heap_used_percent);
+
+        // Heap used, bytes
+        // Component/V1/NodeStats/Jvm/Mem/HeapUsedInBytes/*
+        reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedInBytes", "bytes", nodeName,
+            nodeStats.jvm.mem.heap_used_in_bytes);
+
+        // Non-Heap used, bytes
+        // Component/V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes/*
+        reportNodeMetric("V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes", "bytes", nodeName,
+            nodeStats.jvm.mem.non_heap_used_in_bytes);
+
+        // GC collections (old)
+        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionCount/*
+        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionCount", "collections/second", nodeName,
+            nodeStats.jvm.gc.collectors.old.collection_count);
+
+        // GC collection time (old)
+        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionTime/*
+        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionTime", "milliseconds", nodeName,
+            nodeStats.jvm.gc.collectors.old.collection_time_in_millis);
+
+        // GC collections (young)
+        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionCount/*
+        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionCount", "collections/second", nodeName,
+            nodeStats.jvm.gc.collectors.young.collection_count);
+
+        // GC collection time (young)
+        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionTime/*
+        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionTime", "milliseconds", nodeName,
+            nodeStats.jvm.gc.collectors.young.collection_time_in_millis);
 
         /******************* I/O *******************/
 
         // Disk reads
         // Component/V1/NodeStats/Fs/Total/DiskReadSizeInBytes/*
-        reportNodeProcessedMetric("NodeStats/Fs/Total/DiskReadSizeInBytes", "bytes", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskReadSizeInBytes", "bytes/second", nodeName,
             nodeStats.fs.total.disk_read_size_in_bytes);
 
         // Disk writes
         // Component/V1/NodeStats/Fs/Total/DiskWriteSizeInBytes/*
-        reportNodeProcessedMetric("NodeStats/Fs/Total/DiskWriteSizeInBytes", "bytes", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskWriteSizeInBytes", "bytes/second", nodeName,
             nodeStats.fs.total.disk_write_size_in_bytes);
 
         // Open file descriptors
@@ -367,7 +376,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Store throttle time
         // Component/V1/NodeStats/Indices/Store/ThrottleTimeInMillis/*
-        reportNodeProcessedMetric("NodeStats/Indices/Store/ThrottleTimeInMillis", "ms", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Indices/Store/ThrottleTimeInMillis", "milliseconds", nodeName,
             nodeStats.indices.store.throttle_time_in_millis);
 
 
@@ -375,30 +384,30 @@ public class ElasticsearchAgent extends Agent {
 
         // Transport connections
         // Component/V1/NodeStats/Transport/ServerOpen/*
-        reportNodeProcessedMetric("NodeStats/Transport/ServerOpen", "bytes", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Transport/ServerOpen", "connections", nodeName,
             nodeStats.transport.server_open);
 
         // Client connections
         // Component/V1/NodeStats/Http/TotalOpened/*
-        reportNodeProcessedMetric("NodeStats/Http/TotalOpened", "connections", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Http/TotalOpened", "connections", nodeName,
             nodeStats.http.total_opened);
 
         // Transmit
-        // Component/V1/NodeStats/Transport.TxSizeInBytes/*
-        reportNodeProcessedMetric("NodeStats/Transport/TxSizeInBytes", "bytes", nodeName,
+        // Component/V1/NodeStats/Transport/TxSizeInBytes/*
+        reportNodeProcessedMetric("V1/NodeStats/Transport/TxSizeInBytes", "bytes/second", nodeName,
             nodeStats.transport.tx_size_in_bytes);
 
         // Receive
-        // Component/V1/NodeStats/Transport.RxSizeInBytes/*
-        reportNodeProcessedMetric("NodeStats/Transport/RxSizeInBytes", "bytes", nodeName,
-            nodeStats.transport.rx_size_in_bytes);
+        // Component/V1/NodeStats/Transport/RxSizeInBytes/*
+        reportNodeProcessedMetric("V1/NodeStats/Transport/RxSizeInBytes", "bytes/second", nodeName,
+                nodeStats.transport.rx_size_in_bytes);
 
 
         /******************* Thread pool *******************/
 
         // Search
         // Component/V1/NodeStats/ThreadPool/Search/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Search/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads", nodeName,
             nodeStats.thread_pool.search.completed);
 
         // Search queue
@@ -408,7 +417,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Index
         // Component/V1/NodeStats/ThreadPool/Index/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Index/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Completed", "threads", nodeName,
             nodeStats.thread_pool.index.completed);
 
         // Index queue
@@ -418,7 +427,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Bulk
         // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Bulk/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads", nodeName,
             nodeStats.thread_pool.bulk.completed);
 
         // Bulk queue
@@ -428,7 +437,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Get
         // Component/V1/NodeStats/ThreadPool/Get/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Get/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads", nodeName,
             nodeStats.thread_pool.get.completed);
 
         // Get queue
@@ -438,7 +447,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Merge
         // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Merge/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads", nodeName,
             nodeStats.thread_pool.merge.completed);
 
         // Merge queue
@@ -448,7 +457,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Suggest
         // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Suggest/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads", nodeName,
             nodeStats.thread_pool.suggest.completed);
 
         // Suggest queue
@@ -458,7 +467,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Warmer
         // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Warmer/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads", nodeName,
             nodeStats.thread_pool.warmer.completed);
 
         // Warmer queue
@@ -468,7 +477,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Flush
         // Component/V1/NodeStats/ThreadPool/Flush/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Flush/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads", nodeName,
             nodeStats.thread_pool.flush.completed);
 
         // Flush queue
@@ -478,23 +487,13 @@ public class ElasticsearchAgent extends Agent {
 
         // Refresh
         // Component/V1/NodeStats/ThreadPool/Refresh/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Refresh/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads", nodeName,
             nodeStats.thread_pool.refresh.completed);
 
         // Refresh queue
         // Component/V1/NodeStats/ThreadPool/Refresh/Queue/*
         reportNodeMetric("V1/NodeStats/ThreadPool/Refresh/Queue", "threads", nodeName,
             nodeStats.thread_pool.refresh.queue);
-
-        // Generic
-        // Component/V1/NodeStats/ThreadPool/Generic/Completed/*
-        reportNodeProcessedMetric("NodeStats/ThreadPool/Generic/Completed", "threads", nodeName,
-            nodeStats.thread_pool.generic.completed);
-
-        // Generic queue
-        // Component/V1/NodeStats/ThreadPool/Generic/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Generic/Queue", "threads", nodeName,
-            nodeStats.thread_pool.generic.queue);
     }
 
     private void reportCalculatedClusterStats(NodesStats nodesStats) {
@@ -502,12 +501,12 @@ public class ElasticsearchAgent extends Agent {
 
         NodesStatsService.QueriesStat queriesStat = nodesStatsService.getTotalNumberOfQueries(nodesStats);
 
-        // Component/V1/QueriesStats/*
-        reportMetric("V1/QueriesStats/Search", "queries", queriesStat.search);
-        reportMetric("V1/QueriesStats/Fetch", "queries", queriesStat.fetch);
-        reportMetric("V1/QueriesStats/Get", "queries", queriesStat.get);
-        reportMetric("V1/QueriesStats/Index", "queries", queriesStat.index);
-        reportMetric("V1/QueriesStats/Delete", "queries", queriesStat.delete);
+        // Component/V1/QueriesPerSecond/*
+        reportProcessedMetric("V1/QueriesPerSecond/Search", "requests/second", queriesStat.search);
+        reportProcessedMetric("V1/QueriesPerSecond/Fetch", "requests/second", queriesStat.fetch);
+        reportProcessedMetric("V1/QueriesPerSecond/Get", "requests/second", queriesStat.get);
+        reportProcessedMetric("V1/QueriesPerSecond/Index", "requests/second", queriesStat.index);
+        reportProcessedMetric("V1/QueriesPerSecond/Delete", "requests/second", queriesStat.delete);
     }
 
     private void reportNodesStats(NodesStats nodesStats) {
