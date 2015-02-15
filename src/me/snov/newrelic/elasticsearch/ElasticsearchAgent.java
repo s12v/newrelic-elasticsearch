@@ -18,7 +18,7 @@ import java.util.Map;
 public class ElasticsearchAgent extends Agent {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.1.0";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
@@ -507,6 +507,18 @@ public class ElasticsearchAgent extends Agent {
         reportProcessedMetric("V1/QueriesPerSecond/Get", "requests/second", queriesStat.get);
         reportProcessedMetric("V1/QueriesPerSecond/Index", "requests/second", queriesStat.index);
         reportProcessedMetric("V1/QueriesPerSecond/Delete", "requests/second", queriesStat.delete);
+
+        /******************* Max heap used, % *******************/
+        Long max_heap_percent = 0l;
+        for (NodesStats.NodeStats nodeStats : nodesStats.nodes.values()) {
+            if (nodeStats.jvm.mem.heap_used_percent > max_heap_percent) {
+                max_heap_percent = nodeStats.jvm.mem.heap_used_percent;
+            }
+        }
+        // Max heap used, %
+        // Component/V1/Summary/Jvm/Mem/MaxHeapUsedPercent
+        reportMetric("V1/Summary/Jvm/Mem/MaxHeapUsedPercent", "percent",  max_heap_percent);
+
     }
 
     private void reportNodesStats(NodesStats nodesStats) {
