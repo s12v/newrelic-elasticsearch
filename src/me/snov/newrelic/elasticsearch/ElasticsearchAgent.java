@@ -384,12 +384,12 @@ public class ElasticsearchAgent extends Agent {
 
         // Transport connections
         // Component/V1/NodeStats/Transport/ServerOpen/*
-        reportNodeProcessedMetric("V1/NodeStats/Transport/ServerOpen", "connections", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Transport/ServerOpen", "connections/second", nodeName,
             nodeStats.transport.server_open);
 
         // Client connections
         // Component/V1/NodeStats/Http/TotalOpened/*
-        reportNodeProcessedMetric("V1/NodeStats/Http/TotalOpened", "connections", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/Http/TotalOpened", "connections/second", nodeName,
             nodeStats.http.total_opened);
 
         // Transmit
