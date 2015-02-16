@@ -388,9 +388,9 @@ public class ElasticsearchAgent extends Agent {
             nodeStats.transport.server_open);
 
         // Client connections
-        // Component/V1/NodeStats/Http/TotalOpened/*
-        reportNodeProcessedMetric("V1/NodeStats/Http/TotalOpened", "connections/second", nodeName,
-            nodeStats.http.total_opened);
+        // Component/V1/NodeStats/Http/CurrentOpen/*
+        reportNodeMetric("V1/NodeStats/Http/CurrentOpen", "connections", nodeName,
+            nodeStats.http.current_open);
 
         // Transmit
         // Component/V1/NodeStats/Transport/TxSizeInBytes/*
