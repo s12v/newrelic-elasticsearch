@@ -1,7 +1,7 @@
 {
   "agents": [
     {
-      "host" : "172.29.125.101",
+      "host" : "localhost",
       "port" : 9200
     }
   ]
