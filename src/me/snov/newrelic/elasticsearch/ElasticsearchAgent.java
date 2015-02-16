@@ -18,7 +18,7 @@ import java.util.Map;
 public class ElasticsearchAgent extends Agent {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "1.2.1";
+    private static final String VERSION = "1.3.0";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
@@ -407,7 +407,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Search
         // Component/V1/NodeStats/ThreadPool/Search/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.search.completed);
 
         // Search queue
@@ -417,7 +417,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Index
         // Component/V1/NodeStats/ThreadPool/Index/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.index.completed);
 
         // Index queue
@@ -427,7 +427,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Bulk
         // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.bulk.completed);
 
         // Bulk queue
@@ -437,7 +437,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Get
         // Component/V1/NodeStats/ThreadPool/Get/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.get.completed);
 
         // Get queue
@@ -447,7 +447,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Merge
         // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.merge.completed);
 
         // Merge queue
@@ -457,7 +457,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Suggest
         // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.suggest.completed);
 
         // Suggest queue
@@ -467,7 +467,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Warmer
         // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.warmer.completed);
 
         // Warmer queue
@@ -477,7 +477,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Flush
         // Component/V1/NodeStats/ThreadPool/Flush/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.flush.completed);
 
         // Flush queue
@@ -487,7 +487,7 @@ public class ElasticsearchAgent extends Agent {
 
         // Refresh
         // Component/V1/NodeStats/ThreadPool/Refresh/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads", nodeName,
+        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads/second", nodeName,
             nodeStats.thread_pool.refresh.completed);
 
         // Refresh queue
