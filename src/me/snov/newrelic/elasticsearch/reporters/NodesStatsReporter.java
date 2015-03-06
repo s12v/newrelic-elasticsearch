@@ -276,38 +276,48 @@ public class NodesStatsReporter {
      * System
      */
     private void reportSystem(NodesStats.NodeStats nodeStats, String nodeName) {
-        // CPU used, %
-        // Component/V1/NodeStats/Os/Cpu/Usage/*
-        reportNodeMetric("V1/NodeStats/Os/Cpu/Usage", "percent", nodeName,
-                nodeStats.os.cpu.usage);
-
-        // Memory used, %
-        // Component/V1/NodeStats/Os/Mem/UsedPercent/*
-        reportNodeMetric("V1/NodeStats/Os/Mem/UsedPercent", "percent", nodeName,
-                nodeStats.os.mem.used_percent);
-
-        // Memory used
-        // Component/V1/NodeStats/Os/Mem/UsedInBytes/*
-        reportNodeMetric("V1/NodeStats/Os/Mem/UsedInBytes", "bytes", nodeName,
-                nodeStats.os.mem.used_in_bytes);
-
-        // Load average
-        // Component/V1/NodeStats/Os/LoadAverage/*
-        if (nodeStats.os.load_average != null && nodeStats.os.load_average.size() > 0) {
-            reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName,
-                    nodeStats.os.load_average.get(0));
+        if (nodeStats.os == null) {
+            return;
         }
 
-        // Swap usage
-        // Component/V1/NodeStats/Os/Swap/Percent/*
-        Long swapUsed = 0l;
-        if (nodeStats.os.swap.used_in_bytes != null && nodeStats.os.swap.free_in_bytes != null) {
-            Long swapTotal = nodeStats.os.swap.used_in_bytes.longValue() + nodeStats.os.swap.free_in_bytes.longValue();
-            swapUsed = swapTotal > 0
-                    ? nodeStats.os.swap.used_in_bytes.longValue() / swapTotal
-                    : 0;
+        if (nodeStats.os.cpu != null) {
+            // CPU used, %
+            // Component/V1/NodeStats/Os/Cpu/Usage/*
+            reportNodeMetric("V1/NodeStats/Os/Cpu/Usage", "percent", nodeName,
+                    nodeStats.os.cpu.usage);
         }
-        reportNodeMetric("V1/NodeStats/Os/Swap/Percent", "percent", nodeName, swapUsed);
+
+        if (nodeStats.os.mem != null) {
+            // Memory used, %
+            // Component/V1/NodeStats/Os/Mem/UsedPercent/*
+            reportNodeMetric("V1/NodeStats/Os/Mem/UsedPercent", "percent", nodeName,
+                    nodeStats.os.mem.used_percent);
+
+            // Memory used
+            // Component/V1/NodeStats/Os/Mem/UsedInBytes/*
+            reportNodeMetric("V1/NodeStats/Os/Mem/UsedInBytes", "bytes", nodeName,
+                    nodeStats.os.mem.used_in_bytes);
+
+            // Load average
+            // Component/V1/NodeStats/Os/LoadAverage/*
+            if (nodeStats.os.load_average != null && nodeStats.os.load_average.size() > 0) {
+                reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName,
+                        nodeStats.os.load_average.get(0));
+            }
+        }
+
+        if (nodeStats.os.swap != null) {
+            // Swap usage
+            // Component/V1/NodeStats/Os/Swap/Percent/*
+            Long swapUsed = 0l;
+            if (nodeStats.os.swap.used_in_bytes != null && nodeStats.os.swap.free_in_bytes != null) {
+                Long swapTotal = nodeStats.os.swap.used_in_bytes.longValue() + nodeStats.os.swap.free_in_bytes.longValue();
+                swapUsed = swapTotal > 0
+                        ? nodeStats.os.swap.used_in_bytes.longValue() / swapTotal
+                        : 0;
+            }
+            reportNodeMetric("V1/NodeStats/Os/Swap/Percent", "percent", nodeName, swapUsed);
+        }
     }
 
     /**
