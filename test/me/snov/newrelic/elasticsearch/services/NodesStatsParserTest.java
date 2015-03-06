@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +24,9 @@ public class NodesStatsParserTest {
     }
 
     private NodesStats parseJson(String path) throws IOException {
-        return nodesStatsParser.parse(getClass().getResourceAsStream(path));
+        InputStream stream = getClass().getResourceAsStream(path);
+        assertNotNull(String.format("Resource %s exists", path), stream);
+        return nodesStatsParser.parse(stream);
     }
 
     @Test
