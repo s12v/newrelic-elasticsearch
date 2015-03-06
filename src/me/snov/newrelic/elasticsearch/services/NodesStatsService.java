@@ -1,6 +1,6 @@
-package me.snov.newrelic.elasticsearch.service;
+package me.snov.newrelic.elasticsearch.services;
 
-import me.snov.newrelic.elasticsearch.response.NodesStats;
+import me.snov.newrelic.elasticsearch.responses.NodesStats;
 
 public class NodesStatsService {
 

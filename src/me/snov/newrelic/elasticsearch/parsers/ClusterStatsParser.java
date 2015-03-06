@@ -1,6 +1,6 @@
-package me.snov.newrelic.elasticsearch.service;
+package me.snov.newrelic.elasticsearch.parsers;
 
-import me.snov.newrelic.elasticsearch.response.ClusterStats;
+import me.snov.newrelic.elasticsearch.responses.ClusterStats;
 
 import java.net.MalformedURLException;
 import java.net.URL;

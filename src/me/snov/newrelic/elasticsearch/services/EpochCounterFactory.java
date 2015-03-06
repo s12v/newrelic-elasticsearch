@@ -1,4 +1,4 @@
-package me.snov.newrelic.elasticsearch.service;
+package me.snov.newrelic.elasticsearch.services;
 
 import com.newrelic.metrics.publish.processors.EpochCounter;
 import com.newrelic.metrics.publish.processors.Processor;

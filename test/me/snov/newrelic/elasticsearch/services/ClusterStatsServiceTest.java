@@ -1,6 +1,7 @@
-package me.snov.newrelic.elasticsearch.service;
+package me.snov.newrelic.elasticsearch.services;
 
-import me.snov.newrelic.elasticsearch.response.ClusterStats;
+import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
+import me.snov.newrelic.elasticsearch.responses.ClusterStats;
 import org.junit.Before;
 import org.junit.Test;
 

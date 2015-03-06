@@ -1,4 +1,4 @@
-package me.snov.newrelic.elasticsearch.service;
+package me.snov.newrelic.elasticsearch.parsers;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

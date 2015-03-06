@@ -1,4 +1,4 @@
-package me.snov.newrelic.elasticsearch.response;
+package me.snov.newrelic.elasticsearch.responses;
 
 import java.util.ArrayList;
 
