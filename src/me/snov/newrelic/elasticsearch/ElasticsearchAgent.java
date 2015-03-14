@@ -20,7 +20,7 @@ import java.net.MalformedURLException;
 public class ElasticsearchAgent extends Agent implements AgentInterface {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "1.3.1";
+    private static final String VERSION = "1.4.0";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
@@ -33,14 +33,16 @@ public class ElasticsearchAgent extends Agent implements AgentInterface {
     /**
      * Constructor for Elastisearch Agent
      */
-    public ElasticsearchAgent(String host, Integer port) throws ConfigurationException {
+    public ElasticsearchAgent(String host, Integer port, String name) throws ConfigurationException {
         super(GUID, VERSION);
         try {
             logger = Logger.getLogger(ElasticsearchAgent.class);
             clusterStatsParser = new ClusterStatsParser(host, port);
             nodesStatsParser = new NodesStatsParser(host, port);
             clusterStatsService = new ClusterStatsService();
-            clusterName = getClusterName();
+            clusterName = (name != null && name.length() > 0)
+                ? name
+                : getClusterName();
         } catch (MalformedURLException e) {
             throw new ConfigurationException("URL could not be parsed", e);
         } catch (IOException e) {
