@@ -35,6 +35,13 @@ public class NodesStatsReporterTest {
     }
 
     @Test
+    public void testReportNodesStatsV090() throws Exception {
+        NodesStats nodesStats = parseJson("/resources/nodes_stats_0.90.12.json");
+        reporter.reportNodesStats(nodesStats);
+        assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
+    }
+
+    @Test
     public void testReportNodesStatsV134() throws Exception {
         NodesStats nodesStats = parseJson("/resources/nodes_stats_1.3.4.json");
         reporter.reportNodesStats(nodesStats);

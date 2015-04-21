@@ -41,4 +41,12 @@ public class ClusterStatsParserTest {
         assertEquals(3l, clusterStats.nodes.count.total.longValue());
         assertEquals(1, clusterStats.nodes.versions.size());
     }
+
+    @Test
+    public void testV090() throws Exception {
+        ClusterStats clusterStats = parseJson("/resources/cluster_stats_0.90.12.json");
+        assertEquals("elasticsearch", clusterStats.cluster_name);
+        assertEquals(1l, clusterStats.nodes.count.total.longValue());
+        assertEquals(1, clusterStats.nodes.versions.size());
+    }
 }

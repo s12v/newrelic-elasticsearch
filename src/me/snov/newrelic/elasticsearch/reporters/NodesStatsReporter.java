@@ -41,7 +41,7 @@ public class NodesStatsReporter {
         /******************* Max heap used, % *******************/
         int maxHeapPercent = 0;
         for (NodesStats.NodeStats nodeStats : nodesStats.nodes.values()) {
-            if (nodeStats.jvm.mem.heap_used_percent.intValue() > maxHeapPercent) {
+            if (nodeStats.jvm != null && nodeStats.jvm.mem.heap_used_percent.intValue() > maxHeapPercent) {
                 maxHeapPercent = nodeStats.jvm.mem.heap_used_percent.intValue();
             }
         }
@@ -91,185 +91,195 @@ public class NodesStatsReporter {
      * Thread pool
      */
     private void reportThreadPool(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Search
-        // Component/V1/NodeStats/ThreadPool/Search/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.search.completed);
+        if (nodeStats.thread_pool != null) {
+            // Search
+            // Component/V1/NodeStats/ThreadPool/Search/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.search.completed);
 
-        // Search queue
-        // Component/V1/NodeStats/ThreadPool/Search/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Search/Queue", "threads", nodeName,
-                nodeStats.thread_pool.search.queue);
+            // Search queue
+            // Component/V1/NodeStats/ThreadPool/Search/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Search/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.search.queue);
 
-        // Index
-        // Component/V1/NodeStats/ThreadPool/Index/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.index.completed);
+            // Index
+            // Component/V1/NodeStats/ThreadPool/Index/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.index.completed);
 
-        // Index queue
-        // Component/V1/NodeStats/ThreadPool/Index/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Index/Queue", "threads", nodeName,
-                nodeStats.thread_pool.index.queue);
+            // Index queue
+            // Component/V1/NodeStats/ThreadPool/Index/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Index/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.index.queue);
 
-        // Bulk
-        // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.bulk.completed);
+            // Bulk
+            // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.bulk.completed);
 
-        // Bulk queue
-        // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
-                nodeStats.thread_pool.bulk.queue);
+            // Bulk queue
+            // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.bulk.queue);
 
-        // Get
-        // Component/V1/NodeStats/ThreadPool/Get/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.get.completed);
+            // Get
+            // Component/V1/NodeStats/ThreadPool/Get/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.get.completed);
 
-        // Get queue
-        // Component/V1/NodeStats/ThreadPool/Get/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Get/Queue", "threads", nodeName,
-                nodeStats.thread_pool.get.queue);
+            // Get queue
+            // Component/V1/NodeStats/ThreadPool/Get/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Get/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.get.queue);
 
-        // Merge
-        // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.merge.completed);
+            // Merge
+            // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.merge.completed);
 
-        // Merge queue
-        // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
-                nodeStats.thread_pool.merge.queue);
+            // Merge queue
+            // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.merge.queue);
 
-        // Suggest
-        // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.suggest.completed);
+            // Suggest
+            // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.suggest.completed);
 
-        // Suggest queue
-        // Component/V1/NodeStats/ThreadPool/Suggest/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Suggest/Queue", "threads", nodeName,
-                nodeStats.thread_pool.suggest.queue);
+            // Suggest queue
+            // Component/V1/NodeStats/ThreadPool/Suggest/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Suggest/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.suggest.queue);
 
-        // Warmer
-        // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.warmer.completed);
+            // Warmer
+            // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.warmer.completed);
 
-        // Warmer queue
-        // Component/V1/NodeStats/ThreadPool/Warmer/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Warmer/Queue", "threads", nodeName,
-                nodeStats.thread_pool.warmer.queue);
+            // Warmer queue
+            // Component/V1/NodeStats/ThreadPool/Warmer/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Warmer/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.warmer.queue);
 
-        // Flush
-        // Component/V1/NodeStats/ThreadPool/Flush/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.flush.completed);
+            // Flush
+            // Component/V1/NodeStats/ThreadPool/Flush/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.flush.completed);
 
-        // Flush queue
-        // Component/V1/NodeStats/ThreadPool/Flush/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Flush/Queue", "threads", nodeName,
-                nodeStats.thread_pool.flush.queue);
+            // Flush queue
+            // Component/V1/NodeStats/ThreadPool/Flush/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Flush/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.flush.queue);
 
-        // Refresh
-        // Component/V1/NodeStats/ThreadPool/Refresh/Completed/*
-        reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads/second", nodeName,
-                nodeStats.thread_pool.refresh.completed);
+            // Refresh
+            // Component/V1/NodeStats/ThreadPool/Refresh/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.refresh.completed);
 
-        // Refresh queue
-        // Component/V1/NodeStats/ThreadPool/Refresh/Queue/*
-        reportNodeMetric("V1/NodeStats/ThreadPool/Refresh/Queue", "threads", nodeName,
-                nodeStats.thread_pool.refresh.queue);
+            // Refresh queue
+            // Component/V1/NodeStats/ThreadPool/Refresh/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Refresh/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.refresh.queue);
+        }
     }
 
     /**
      * Network
      */
     private void reportNetwork(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Opened transport connections
-        // Component/V1/NodeStats/Transport/ServerOpen/*
-        reportNodeMetric("V1/NodeStats/Transport/ServerOpen", "connections", nodeName,
-                nodeStats.transport.server_open);
+        if (nodeStats.transport != null) {
+            // Opened transport connections
+            // Component/V1/NodeStats/Transport/ServerOpen/*
+            reportNodeMetric("V1/NodeStats/Transport/ServerOpen", "connections", nodeName,
+                    nodeStats.transport.server_open);
 
-        // Client connections
-        // Component/V1/NodeStats/Http/CurrentOpen/*
-        reportNodeMetric("V1/NodeStats/Http/CurrentOpen", "connections", nodeName,
-                nodeStats.http.current_open);
+            // Transmit
+            // Component/V1/NodeStats/Transport/TxSizeInBytes/*
+            reportNodeProcessedMetric("V1/NodeStats/Transport/TxSizeInBytes", "bytes/second", nodeName,
+                    nodeStats.transport.tx_size_in_bytes);
 
-        // Transmit
-        // Component/V1/NodeStats/Transport/TxSizeInBytes/*
-        reportNodeProcessedMetric("V1/NodeStats/Transport/TxSizeInBytes", "bytes/second", nodeName,
-                nodeStats.transport.tx_size_in_bytes);
+            // Receive
+            // Component/V1/NodeStats/Transport/RxSizeInBytes/*
+            reportNodeProcessedMetric("V1/NodeStats/Transport/RxSizeInBytes", "bytes/second", nodeName,
+                    nodeStats.transport.rx_size_in_bytes);
+        }
 
-        // Receive
-        // Component/V1/NodeStats/Transport/RxSizeInBytes/*
-        reportNodeProcessedMetric("V1/NodeStats/Transport/RxSizeInBytes", "bytes/second", nodeName,
-                nodeStats.transport.rx_size_in_bytes);
+        if (nodeStats.http != null) {
+            // Client connections
+            // Component/V1/NodeStats/Http/CurrentOpen/*
+            reportNodeMetric("V1/NodeStats/Http/CurrentOpen", "connections", nodeName,
+                    nodeStats.http.current_open);
+        }
     }
 
     /**
      * I/O
      */
     private void reportIo(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Disk reads
-        // Component/V1/NodeStats/Fs/Total/DiskReadSizeInBytes/*
-        reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskReadSizeInBytes", "bytes/second", nodeName,
-                nodeStats.fs.total.disk_read_size_in_bytes);
+        if (nodeStats.fs != null) {
+            // Disk reads
+            // Component/V1/NodeStats/Fs/Total/DiskReadSizeInBytes/*
+            reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskReadSizeInBytes", "bytes/second", nodeName,
+                    nodeStats.fs.total.disk_read_size_in_bytes);
 
-        // Disk writes
-        // Component/V1/NodeStats/Fs/Total/DiskWriteSizeInBytes/*
-        reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskWriteSizeInBytes", "bytes/second", nodeName,
-                nodeStats.fs.total.disk_write_size_in_bytes);
+            // Disk writes
+            // Component/V1/NodeStats/Fs/Total/DiskWriteSizeInBytes/*
+            reportNodeProcessedMetric("V1/NodeStats/Fs/Total/DiskWriteSizeInBytes", "bytes/second", nodeName,
+                    nodeStats.fs.total.disk_write_size_in_bytes);
 
-        // Open file descriptors
-        // Component/V1/NodeStats/Process/OpenFileDescriptors/*
-        reportNodeMetric("V1/NodeStats/Process/OpenFileDescriptors", "descriptors", nodeName,
-                nodeStats.process.open_file_descriptors);
+            // Open file descriptors
+            // Component/V1/NodeStats/Process/OpenFileDescriptors/*
+            reportNodeMetric("V1/NodeStats/Process/OpenFileDescriptors", "descriptors", nodeName,
+                    nodeStats.process.open_file_descriptors);
 
-        // Store throttle time
-        // Component/V1/NodeStats/Indices/Store/ThrottleTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Store/ThrottleTimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.store.throttle_time_in_millis);
+            // Store throttle time
+            // Component/V1/NodeStats/Indices/Store/ThrottleTimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Store/ThrottleTimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.store.throttle_time_in_millis);
+        }
     }
 
     /**
      * JVM
      */
     private void reportJvm(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Heap used, %
-        // Component/V1/NodeStats/Jvm/Mem/HeapUsedPercent/*
-        reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedPercent", "percent", nodeName,
-                nodeStats.jvm.mem.heap_used_percent);
+        if (nodeStats.jvm != null) {
+            // Heap used, %
+            // Component/V1/NodeStats/Jvm/Mem/HeapUsedPercent/*
+            reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedPercent", "percent", nodeName,
+                    nodeStats.jvm.mem.heap_used_percent);
 
-        // Heap used, bytes
-        // Component/V1/NodeStats/Jvm/Mem/HeapUsedInBytes/*
-        reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedInBytes", "bytes", nodeName,
-                nodeStats.jvm.mem.heap_used_in_bytes);
+            // Heap used, bytes
+            // Component/V1/NodeStats/Jvm/Mem/HeapUsedInBytes/*
+            reportNodeMetric("V1/NodeStats/Jvm/Mem/HeapUsedInBytes", "bytes", nodeName,
+                    nodeStats.jvm.mem.heap_used_in_bytes);
 
-        // Non-Heap used, bytes
-        // Component/V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes/*
-        reportNodeMetric("V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes", "bytes", nodeName,
-                nodeStats.jvm.mem.non_heap_used_in_bytes);
+            // Non-Heap used, bytes
+            // Component/V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes/*
+            reportNodeMetric("V1/NodeStats/Jvm/Mem/NonHeapUsedInBytes", "bytes", nodeName,
+                    nodeStats.jvm.mem.non_heap_used_in_bytes);
 
-        // GC collections (old)
-        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionCount/*
-        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionCount", "collections/second", nodeName,
-                nodeStats.jvm.gc.collectors.old.collection_count);
+            // GC collections (old)
+            // Component/V1/NodeStats/Jvm/Gc/Old/CollectionCount/*
+            reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionCount", "collections/second", nodeName,
+                    nodeStats.jvm.gc.collectors.old.collection_count);
 
-        // GC collection time (old)
-        // Component/V1/NodeStats/Jvm/Gc/Old/CollectionTime/*
-        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionTime", "milliseconds", nodeName,
-                nodeStats.jvm.gc.collectors.old.collection_time_in_millis);
+            // GC collection time (old)
+            // Component/V1/NodeStats/Jvm/Gc/Old/CollectionTime/*
+            reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Old/CollectionTime", "milliseconds", nodeName,
+                    nodeStats.jvm.gc.collectors.old.collection_time_in_millis);
 
-        // GC collections (young)
-        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionCount/*
-        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionCount", "collections/second", nodeName,
-                nodeStats.jvm.gc.collectors.young.collection_count);
+            // GC collections (young)
+            // Component/V1/NodeStats/Jvm/Gc/Young/CollectionCount/*
+            reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionCount", "collections/second", nodeName,
+                    nodeStats.jvm.gc.collectors.young.collection_count);
 
-        // GC collection time (young)
-        // Component/V1/NodeStats/Jvm/Gc/Young/CollectionTime/*
-        reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionTime", "milliseconds", nodeName,
-                nodeStats.jvm.gc.collectors.young.collection_time_in_millis);
+            // GC collection time (young)
+            // Component/V1/NodeStats/Jvm/Gc/Young/CollectionTime/*
+            reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionTime", "milliseconds", nodeName,
+                    nodeStats.jvm.gc.collectors.young.collection_time_in_millis);
+        }
     }
 
     /**
@@ -324,65 +334,77 @@ public class NodesStatsReporter {
      * Cache
      */
     private void reportCache(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Filter cache
-        // Component/V1/NodeStats/Indices/FilterCache/Size/*
-        reportNodeMetric("V1/NodeStats/Indices/FilterCache/Size", "bytes", nodeName,
-                nodeStats.indices.filter_cache.memory_size_in_bytes);
+        if (nodeStats.indices.filter_cache != null) {
+            // Filter cache
+            // Component/V1/NodeStats/Indices/FilterCache/Size/*
+            reportNodeMetric("V1/NodeStats/Indices/FilterCache/Size", "bytes", nodeName,
+                    nodeStats.indices.filter_cache.memory_size_in_bytes);
 
-        // Filter evictions
-        // Component/V1/NodeStats/Indices/FilterCache/Evictions/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/FilterCache/Evictions", "evictions/second", nodeName,
-                nodeStats.indices.filter_cache.evictions);
+            // Filter evictions
+            // Component/V1/NodeStats/Indices/FilterCache/Evictions/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/FilterCache/Evictions", "evictions/second", nodeName,
+                    nodeStats.indices.filter_cache.evictions);
+        }
 
-        // Field data
-        // Component/V1/NodeStats/Indices/Fielddata/Size/*
-        reportNodeMetric("V1/NodeStats/Indices/Fielddata/Size", "bytes", nodeName,
-                nodeStats.indices.fielddata.memory_size_in_bytes);
+        if (nodeStats.indices.fielddata != null) {
+            // Field data
+            // Component/V1/NodeStats/Indices/Fielddata/Size/*
+            reportNodeMetric("V1/NodeStats/Indices/Fielddata/Size", "bytes", nodeName,
+                    nodeStats.indices.fielddata.memory_size_in_bytes);
 
-        // Field evictions
-        // Component/V1/NodeStats/Indices/Fielddata/Evictions/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Fielddata/Evictions", "evictions/second", nodeName,
-                nodeStats.indices.fielddata.evictions);
+            // Field evictions
+            // Component/V1/NodeStats/Indices/Fielddata/Evictions/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Fielddata/Evictions", "evictions/second", nodeName,
+                    nodeStats.indices.fielddata.evictions);
+        }
 
-        // Id cache
-        // Component/V1/NodeStats/Indices/IdCache/Size/*
-        reportNodeMetric("V1/NodeStats/Indices/IdCache/Size", "bytes", nodeName,
-                nodeStats.indices.id_cache.memory_size_in_bytes);
+        if (nodeStats.indices.id_cache != null) {
+            // Id cache
+            // Component/V1/NodeStats/Indices/IdCache/Size/*
+            reportNodeMetric("V1/NodeStats/Indices/IdCache/Size", "bytes", nodeName,
+                    nodeStats.indices.id_cache.memory_size_in_bytes);
+        }
 
-        // Completion
-        // Component/V1/NodeStats/Indices/Completion/Size/*
-        reportNodeMetric("V1/NodeStats/Indices/Completion/Size", "bytes", nodeName,
-                nodeStats.indices.completion.size_in_bytes);
+        if (nodeStats.indices.completion != null) {
+            // Completion
+            // Component/V1/NodeStats/Indices/Completion/Size/*
+            reportNodeMetric("V1/NodeStats/Indices/Completion/Size", "bytes", nodeName,
+                    nodeStats.indices.completion.size_in_bytes);
+        }
     }
 
     /**
      * Merges
      */
     private void reportMerges(NodesStats.NodeStats nodeStats, String nodeName) {
-        // Merges
-        // Component/V1/NodeStats/Indices/Merges/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/Total", "merges/second", nodeName,
-                nodeStats.indices.merges.total);
+        if (nodeStats.indices.merges != null) {
+            // Merges
+            // Component/V1/NodeStats/Indices/Merges/Total/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/Total", "merges/second", nodeName,
+                    nodeStats.indices.merges.total);
 
-        // Merge size
-        // Component/V1/NodeStats/Indices/Merges/TotalSizeInBytes/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalSizeInBytes", "bytes/second", nodeName,
-                nodeStats.indices.merges.total_size_in_bytes);
+            // Merge size
+            // Component/V1/NodeStats/Indices/Merges/TotalSizeInBytes/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalSizeInBytes", "bytes/second", nodeName,
+                    nodeStats.indices.merges.total_size_in_bytes);
 
-        // Merge time
-        // Component/V1/NodeStats/Indices/Merges/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalTimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.merges.total_time_in_millis);
+            // Merge time
+            // Component/V1/NodeStats/Indices/Merges/TotalTimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalTimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.merges.total_time_in_millis);
 
-        // Merged docs
-        // Component/V1/NodeStats/Indices/Merges/TotalDocs/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalDocs", "docs/second", nodeName,
-                nodeStats.indices.merges.total_docs);
+            // Merged docs
+            // Component/V1/NodeStats/Indices/Merges/TotalDocs/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Merges/TotalDocs", "docs/second", nodeName,
+                    nodeStats.indices.merges.total_docs);
+        }
 
-        // Merged segments
-        // Component/V1/NodeStats/Indices/Segments/Count/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Segments/Count", "segments/second", nodeName,
-                nodeStats.indices.segments.count);
+        if (nodeStats.indices.segments != null) {
+            // Merged segments
+            // Component/V1/NodeStats/Indices/Segments/Count/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Segments/Count", "segments/second", nodeName,
+                    nodeStats.indices.segments.count);
+        }
     }
 
     /**
@@ -419,15 +441,17 @@ public class NodesStatsReporter {
         reportNodeProcessedMetric("V1/NodeStats/Indices/Get/TimeInMillis", "milliseconds", nodeName,
                 nodeStats.indices.get.time_in_millis);
 
-        // Suggest
-        // Component/V1/NodeStats/Indices/Suggest/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/Total", "requests/second", nodeName,
-                nodeStats.indices.suggest.total);
+        if (nodeStats.indices.suggest != null) {
+            // Suggest
+            // Component/V1/NodeStats/Indices/Suggest/Total/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/Total", "requests/second", nodeName,
+                    nodeStats.indices.suggest.total);
 
-        // Suggest time
-        // Component/V1/NodeStats/Indices/Suggest/TimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/TimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.suggest.time_in_millis);
+            // Suggest time
+            // Component/V1/NodeStats/Indices/Suggest/TimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Suggest/TimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.suggest.time_in_millis);
+        }
     }
 
     /**
@@ -454,35 +478,41 @@ public class NodesStatsReporter {
         reportNodeProcessedMetric("V1/NodeStats/Indices/Indexing/DeleteTimeInMillis", "milliseconds", nodeName,
                 nodeStats.indices.indexing.delete_time_in_millis);
 
-        // Refresh
-        // Component/V1/NodeStats/Indices/Refresh/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/Total", "operations/second", nodeName,
-                nodeStats.indices.refresh.total);
+        if (nodeStats.indices.refresh != null) {
+            // Refresh
+            // Component/V1/NodeStats/Indices/Refresh/Total/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/Total", "operations/second", nodeName,
+                    nodeStats.indices.refresh.total);
 
-        // Refresh time
-        // Component/V1/NodeStats/Indices/Refresh/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/TotalTimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.refresh.total_time_in_millis);
+            // Refresh time
+            // Component/V1/NodeStats/Indices/Refresh/TotalTimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Refresh/TotalTimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.refresh.total_time_in_millis);
+        }
 
-        // Flush
-        // Component/V1/NodeStats/Indices/Flush/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/Total", "operations/second", nodeName,
-                nodeStats.indices.flush.total);
+        if (nodeStats.indices.flush != null) {
+            // Flush
+            // Component/V1/NodeStats/Indices/Flush/Total/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/Total", "operations/second", nodeName,
+                    nodeStats.indices.flush.total);
 
-        // Flush time
-        // Component/V1/NodeStats/Indices/Flush/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/TotalTimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.flush.total_time_in_millis);
+            // Flush time
+            // Component/V1/NodeStats/Indices/Flush/TotalTimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Flush/TotalTimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.flush.total_time_in_millis);
+        }
 
-        // Warmer
-        // Component/V1/NodeStats/Indices/Warmer/Total/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/Total", "operations/second", nodeName,
-                nodeStats.indices.warmer.total);
+        if (nodeStats.indices.warmer != null) {
+            // Warmer
+            // Component/V1/NodeStats/Indices/Warmer/Total/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/Total", "operations/second", nodeName,
+                    nodeStats.indices.warmer.total);
 
-        // Warmer time
-        // Component/V1/NodeStats/Indices/Warmer/TotalTimeInMillis/*
-        reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/TotalTimeInMillis", "milliseconds", nodeName,
-                nodeStats.indices.warmer.total_time_in_millis);
+            // Warmer time
+            // Component/V1/NodeStats/Indices/Warmer/TotalTimeInMillis/*
+            reportNodeProcessedMetric("V1/NodeStats/Indices/Warmer/TotalTimeInMillis", "milliseconds", nodeName,
+                    nodeStats.indices.warmer.total_time_in_millis);
+        }
     }
 
     /**

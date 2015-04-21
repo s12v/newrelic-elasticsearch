@@ -1,0 +1,56 @@
+{
+  "cluster_name": "elasticsearch",
+  "nodes": {
+    "O7z282NvRz2xlHjNhmQTZg": {
+      "timestamp": 1429529712900,
+      "name": "Challenger",
+      "transport_address": "inet[/10.0.2.15:9300]",
+      "hostname": "vagrant-ubuntu-trusty-64",
+      "indices": {
+        "docs": {
+          "count": 0,
+          "deleted": 0
+        },
+        "store": {
+          "size": "0b",
+          "size_in_bytes": 0,
+          "throttle_time": "0s",
+          "throttle_time_in_millis": 0
+        },
+        "indexing": {
+          "index_total": 0,
+          "index_time": "0s",
+          "index_time_in_millis": 0,
+          "index_current": 0,
+          "delete_total": 0,
+          "delete_time": "0s",
+          "delete_time_in_millis": 0,
+          "delete_current": 0
+        },
+        "get": {
+          "total": 0,
+          "get_time": "0s",
+          "time_in_millis": 0,
+          "exists_total": 0,
+          "exists_time": "0s",
+          "exists_time_in_millis": 0,
+          "missing_total": 0,
+          "missing_time": "0s",
+          "missing_time_in_millis": 0,
+          "current": 0
+        },
+        "search": {
+          "open_contexts": 0,
+          "query_total": 0,
+          "query_time": "0s",
+          "query_time_in_millis": 0,
+          "query_current": 0,
+          "fetch_total": 0,
+          "fetch_time": "0s",
+          "fetch_time_in_millis": 0,
+          "fetch_current": 0
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project name="elasticsearch" default="dist" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
-    <property name="version" value="1.4.0" />
+    <!-- Change also me.snov.newrelic.elasticsearch.ElasticsearchAgent.VERSION -->
+    <property name="version" value="1.4.1" />
     <property name="filename" value="newrelic-elasticsearch-plugin-${version}"/>
     <property name="jarfile" value="plugin.jar" />
     <property name="tarfile" value="${filename}.tar.gz" />

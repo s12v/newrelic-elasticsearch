@@ -1,0 +1,124 @@
+{
+  "timestamp": 1429529774861,
+  "cluster_name": "elasticsearch",
+  "status": "green",
+  "indices": {
+    "count": 0,
+    "shards": {},
+    "docs": {
+      "count": 0,
+      "deleted": 0
+    },
+    "store": {
+      "size": "0b",
+      "size_in_bytes": 0,
+      "throttle_time": "0s",
+      "throttle_time_in_millis": 0
+    },
+    "fielddata": {
+      "memory_size": "0b",
+      "memory_size_in_bytes": 0,
+      "evictions": 0
+    },
+    "filter_cache": {
+      "memory_size": "0b",
+      "memory_size_in_bytes": 0,
+      "evictions": 0
+    },
+    "id_cache": {
+      "memory_size": "0b",
+      "memory_size_in_bytes": 0
+    },
+    "completion": {
+      "size": "0b",
+      "size_in_bytes": 0
+    },
+    "segments": {
+      "count": 0,
+      "memory": "0b",
+      "memory_in_bytes": 0
+    }
+  },
+  "nodes": {
+    "count": {
+      "total": 1,
+      "master_only": 0,
+      "data_only": 0,
+      "master_data": 1,
+      "client": 0
+    },
+    "versions": [
+      "0.90.12"
+    ],
+    "os": {
+      "available_processors": 1,
+      "mem": {
+        "total": "489.9mb",
+        "total_in_bytes": 513798144
+      },
+      "cpu": [
+        {
+          "vendor": "Intel",
+          "model": "Core(TM) i5-3210M CPU @ 2.50GHz",
+          "mhz": 2508,
+          "total_cores": 1,
+          "total_sockets": 1,
+          "cores_per_socket": 1,
+          "cache_size": "6kb",
+          "cache_size_in_bytes": 6144,
+          "count": 1
+        }
+      ]
+    },
+    "process": {
+      "cpu": {
+        "percent": 0
+      },
+      "open_file_descriptors": {
+        "min": 94,
+        "max": 94,
+        "avg": 94
+      }
+    },
+    "jvm": {
+      "max_uptime": "3m",
+      "max_uptime_in_millis": 185166,
+      "versions": [
+        {
+          "version": "1.7.0_75",
+          "vm_name": "OpenJDK 64-Bit Server VM",
+          "vm_version": "24.75-b04",
+          "vm_vendor": "Oracle Corporation",
+          "count": 1
+        }
+      ],
+      "mem": {
+        "heap_used": "70.2mb",
+        "heap_used_in_bytes": 73700816,
+        "heap_max": "1015.6mb",
+        "heap_max_in_bytes": 1065025536
+      },
+      "threads": 24
+    },
+    "fs": {
+      "total": "39.3gb",
+      "total_in_bytes": 42241163264,
+      "free": "38gb",
+      "free_in_bytes": 40849571840,
+      "available": "36.3gb",
+      "available_in_bytes": 39071997952,
+      "disk_reads": 7917,
+      "disk_writes": 180,
+      "disk_io_op": 8097,
+      "disk_read_size": "122.4mb",
+      "disk_read_size_in_bytes": 128414720,
+      "disk_write_size": "1.9mb",
+      "disk_write_size_in_bytes": 1998848,
+      "disk_io_size": "124.3mb",
+      "disk_io_size_in_bytes": 130413568,
+      "disk_queue": "0",
+      "disk_service_time": "0"
+    },
+    "plugins": []
+  }
+}
