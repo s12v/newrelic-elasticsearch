@@ -61,4 +61,11 @@ public class NodesStatsReporterTest {
         reporter.reportNodesStats(nodesStats);
         assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
     }
+
+    @Test
+    public void testReportNodesStatsV151() throws Exception {
+        NodesStats nodesStats = parseJson("/resources/nodes_stats_1.5.1.json");
+        reporter.reportNodesStats(nodesStats);
+        assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
+    }
 }
