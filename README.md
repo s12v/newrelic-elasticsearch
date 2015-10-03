@@ -10,7 +10,13 @@ http://newrelic.com/plugins/sergey-novikov/299
 
 ## Installation
 
-```
-npi install me.snov.newrelic-elasticsearch
-```
+### Simple interactive installation with NPI
+
 See https://docs.newrelic.com/docs/plugins/plugins-new-relic/installing-plugins/installing-npi-compatible-plugin
+```
+./npi install me.snov.newrelic-elasticsearch
+```
+
+### Docker
+
+See https://hub.docker.com/r/s12v/newrelic-elasticsearch/
