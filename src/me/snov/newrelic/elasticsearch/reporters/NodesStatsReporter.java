@@ -282,7 +282,7 @@ public class NodesStatsReporter {
 
             // JVM uptime
             // Component/V1/NodeStats/Jvm/UptimeInMillis/*
-            reportNodeMetric("V1/NodeStats/Jvm/UptimeInMillis", "units", nodeName, nodeStats.jvm.uptime_in_millis);
+            reportNodeMetric("V1/NodeStats/Jvm/UptimeInMillis", "milliseconds", nodeName, nodeStats.jvm.uptime_in_millis);
         }
     }
 
@@ -323,7 +323,7 @@ public class NodesStatsReporter {
         // Uptime
         // Component/V1/NodeStats/Os/UptimeInMillis/*
         if (nodeStats.os.uptime_in_millis != null) {
-            reportNodeMetric("V1/NodeStats/Os/UptimeInMillis", "units", nodeName,
+            reportNodeMetric("V1/NodeStats/Os/UptimeInMillis", "milliseconds", nodeName,
                     nodeStats.os.uptime_in_millis);
         }
 
@@ -411,9 +411,8 @@ public class NodesStatsReporter {
         }
 
         if (nodeStats.indices.segments != null) {
-            // Merged segments
             // Component/V1/NodeStats/Indices/Segments/Count/*
-            reportNodeProcessedMetric("V1/NodeStats/Indices/Segments/Count", "segments/second", nodeName,
+            reportNodeMetric("V1/NodeStats/Indices/Segments/Count", "segments", nodeName,
                     nodeStats.indices.segments.count);
         }
     }
