@@ -279,6 +279,10 @@ public class NodesStatsReporter {
             // Component/V1/NodeStats/Jvm/Gc/Young/CollectionTime/*
             reportNodeProcessedMetric("V1/NodeStats/Jvm/Gc/Young/CollectionTime", "milliseconds", nodeName,
                     nodeStats.jvm.gc.collectors.young.collection_time_in_millis);
+
+            // JVM uptime
+            // Component/V1/NodeStats/Jvm/UptimeInMillis/*
+            reportNodeMetric("V1/NodeStats/Jvm/UptimeInMillis", "milliseconds", nodeName, nodeStats.jvm.uptime_in_millis);
         }
     }
 
@@ -307,13 +311,20 @@ public class NodesStatsReporter {
             // Component/V1/NodeStats/Os/Mem/UsedInBytes/*
             reportNodeMetric("V1/NodeStats/Os/Mem/UsedInBytes", "bytes", nodeName,
                     nodeStats.os.mem.used_in_bytes);
+        }
 
-            // Load average
-            // Component/V1/NodeStats/Os/LoadAverage/*
-            if (nodeStats.os.load_average != null && nodeStats.os.load_average.size() > 0) {
-                reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName,
-                        nodeStats.os.load_average.get(0));
-            }
+        // Load average
+        // Component/V1/NodeStats/Os/LoadAverage/*
+        if (nodeStats.os.load_average != null && nodeStats.os.load_average.size() > 0) {
+            reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName,
+                    nodeStats.os.load_average.get(0));
+        }
+
+        // Uptime
+        // Component/V1/NodeStats/Os/UptimeInMillis/*
+        if (nodeStats.os.uptime_in_millis != null) {
+            reportNodeMetric("V1/NodeStats/Os/UptimeInMillis", "milliseconds", nodeName,
+                    nodeStats.os.uptime_in_millis);
         }
 
         if (nodeStats.os.swap != null) {
@@ -400,9 +411,8 @@ public class NodesStatsReporter {
         }
 
         if (nodeStats.indices.segments != null) {
-            // Merged segments
             // Component/V1/NodeStats/Indices/Segments/Count/*
-            reportNodeProcessedMetric("V1/NodeStats/Indices/Segments/Count", "segments/second", nodeName,
+            reportNodeMetric("V1/NodeStats/Indices/Segments/Count", "segments", nodeName,
                     nodeStats.indices.segments.count);
         }
     }
