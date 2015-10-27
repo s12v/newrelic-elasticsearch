@@ -104,7 +104,7 @@ public class NodesStatsReporter {
 
             // Search: rejected
             // Component/V1/NodeStats/ThreadPool/Search/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.search.rejected);
 
             // Get
@@ -119,7 +119,7 @@ public class NodesStatsReporter {
 
             // Get: rejected
             // Component/V1/NodeStats/ThreadPool/Get/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.get.rejected);
 
             // Suggest
@@ -134,7 +134,7 @@ public class NodesStatsReporter {
 
             // Suggest: rejected
             // Component/V1/NodeStats/ThreadPool/Suggest/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.suggest.rejected);
 
             // Index
@@ -149,7 +149,7 @@ public class NodesStatsReporter {
 
             // Index rejected
             // Component/V1/NodeStats/ThreadPool/Index/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.index.rejected);
 
             // Merge
@@ -164,7 +164,7 @@ public class NodesStatsReporter {
 
             // Merge: rejected
             // Component/V1/NodeStats/ThreadPool/Merge/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.merge.rejected);
 
             // Bulk
@@ -179,7 +179,7 @@ public class NodesStatsReporter {
 
             // Bulk: rejected
             // Component/V1/NodeStats/ThreadPool/Bulk/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.bulk.rejected);
 
             // Warmer
@@ -194,7 +194,7 @@ public class NodesStatsReporter {
 
             // Warmer: rejected
             // Component/V1/NodeStats/ThreadPool/Warmer/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.warmer.rejected);
 
             // Flush
@@ -209,7 +209,7 @@ public class NodesStatsReporter {
 
             // Flush: rejected
             // Component/V1/NodeStats/ThreadPool/Flush/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.flush.rejected);
 
             // Refresh
@@ -224,7 +224,7 @@ public class NodesStatsReporter {
 
             // Refresh: rejected
             // Component/V1/NodeStats/ThreadPool/Refresh/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Rejected", "threads", nodeName,
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.refresh.rejected);
         }
     }
