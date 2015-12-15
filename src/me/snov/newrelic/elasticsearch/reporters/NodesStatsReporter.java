@@ -97,10 +97,45 @@ public class NodesStatsReporter {
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Completed", "threads/second", nodeName,
                     nodeStats.thread_pool.search.completed);
 
-            // Search queue
+            // Search: queue
             // Component/V1/NodeStats/ThreadPool/Search/Queue/*
             reportNodeMetric("V1/NodeStats/ThreadPool/Search/Queue", "threads", nodeName,
                     nodeStats.thread_pool.search.queue);
+
+            // Search: rejected
+            // Component/V1/NodeStats/ThreadPool/Search/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Search/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.search.rejected);
+
+            // Get
+            // Component/V1/NodeStats/ThreadPool/Get/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.get.completed);
+
+            // Get: queue
+            // Component/V1/NodeStats/ThreadPool/Get/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Get/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.get.queue);
+
+            // Get: rejected
+            // Component/V1/NodeStats/ThreadPool/Get/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.get.rejected);
+
+            // Suggest
+            // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.suggest.completed);
+
+            // Suggest: queue
+            // Component/V1/NodeStats/ThreadPool/Suggest/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Suggest/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.suggest.queue);
+
+            // Suggest: rejected
+            // Component/V1/NodeStats/ThreadPool/Suggest/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.suggest.rejected);
 
             // Index
             // Component/V1/NodeStats/ThreadPool/Index/Completed/*
@@ -112,75 +147,85 @@ public class NodesStatsReporter {
             reportNodeMetric("V1/NodeStats/ThreadPool/Index/Queue", "threads", nodeName,
                     nodeStats.thread_pool.index.queue);
 
-            // Bulk
-            // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
-                    nodeStats.thread_pool.bulk.completed);
-
-            // Bulk queue
-            // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
-            reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
-                    nodeStats.thread_pool.bulk.queue);
-
-            // Get
-            // Component/V1/NodeStats/ThreadPool/Get/Completed/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Get/Completed", "threads/second", nodeName,
-                    nodeStats.thread_pool.get.completed);
-
-            // Get queue
-            // Component/V1/NodeStats/ThreadPool/Get/Queue/*
-            reportNodeMetric("V1/NodeStats/ThreadPool/Get/Queue", "threads", nodeName,
-                    nodeStats.thread_pool.get.queue);
+            // Index rejected
+            // Component/V1/NodeStats/ThreadPool/Index/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.index.rejected);
 
             // Merge
             // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
                     nodeStats.thread_pool.merge.completed);
 
-            // Merge queue
+            // Merge: queue
             // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
             reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
                     nodeStats.thread_pool.merge.queue);
 
-            // Suggest
-            // Component/V1/NodeStats/ThreadPool/Suggest/Completed/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Suggest/Completed", "threads/second", nodeName,
-                    nodeStats.thread_pool.suggest.completed);
+            // Merge: rejected
+            // Component/V1/NodeStats/ThreadPool/Merge/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.merge.rejected);
 
-            // Suggest queue
-            // Component/V1/NodeStats/ThreadPool/Suggest/Queue/*
-            reportNodeMetric("V1/NodeStats/ThreadPool/Suggest/Queue", "threads", nodeName,
-                    nodeStats.thread_pool.suggest.queue);
+            // Bulk
+            // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
+                    nodeStats.thread_pool.bulk.completed);
+
+            // Bulk: queue
+            // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
+            reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
+                    nodeStats.thread_pool.bulk.queue);
+
+            // Bulk: rejected
+            // Component/V1/NodeStats/ThreadPool/Bulk/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.bulk.rejected);
 
             // Warmer
             // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Completed", "threads/second", nodeName,
                     nodeStats.thread_pool.warmer.completed);
 
-            // Warmer queue
+            // Warmer: queue
             // Component/V1/NodeStats/ThreadPool/Warmer/Queue/*
             reportNodeMetric("V1/NodeStats/ThreadPool/Warmer/Queue", "threads", nodeName,
                     nodeStats.thread_pool.warmer.queue);
+
+            // Warmer: rejected
+            // Component/V1/NodeStats/ThreadPool/Warmer/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Warmer/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.warmer.rejected);
 
             // Flush
             // Component/V1/NodeStats/ThreadPool/Flush/Completed/*
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Completed", "threads/second", nodeName,
                     nodeStats.thread_pool.flush.completed);
 
-            // Flush queue
+            // Flush: queue
             // Component/V1/NodeStats/ThreadPool/Flush/Queue/*
             reportNodeMetric("V1/NodeStats/ThreadPool/Flush/Queue", "threads", nodeName,
                     nodeStats.thread_pool.flush.queue);
+
+            // Flush: rejected
+            // Component/V1/NodeStats/ThreadPool/Flush/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Flush/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.flush.rejected);
 
             // Refresh
             // Component/V1/NodeStats/ThreadPool/Refresh/Completed/*
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Completed", "threads/second", nodeName,
                     nodeStats.thread_pool.refresh.completed);
 
-            // Refresh queue
+            // Refresh: queue
             // Component/V1/NodeStats/ThreadPool/Refresh/Queue/*
             reportNodeMetric("V1/NodeStats/ThreadPool/Refresh/Queue", "threads", nodeName,
                     nodeStats.thread_pool.refresh.queue);
+
+            // Refresh: rejected
+            // Component/V1/NodeStats/ThreadPool/Refresh/Rejected/*
+            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Refresh/Rejected", "threads/second", nodeName,
+                    nodeStats.thread_pool.refresh.rejected);
         }
     }
 
