@@ -1,10 +1,24 @@
+sudo: required
+dist: trusty
+
 language: java
 
+env:
+  - ELASTICSEARCH_VERSION="1.3"
+  - ELASTICSEARCH_VERSION="1.4"
+  - ELASTICSEARCH_VERSION="1.5"
+  - ELASTICSEARCH_VERSION="1.6"
+  - ELASTICSEARCH_VERSION="1.7"
+  - ELASTICSEARCH_VERSION="2.0"
+  - ELASTICSEARCH_VERSION="2.1"
+
 jdk:
-  - openjdk6
-  - openjdk7
   - oraclejdk7
   - oraclejdk8
+
+before_install:
+  - docker run -d -p 127.0.0.1:9200:9200 elasticsearch:$ELASTICSEARCH_VERSION
+  - sleep 5
 
 script:
   - ant
@@ -18,4 +32,6 @@ deploy:
     on:
         tags: true
         all_branches: true
-        condition: $TRAVIS_JDK_VERSION = openjdk6
+        condition:
+          - $TRAVIS_JDK_VERSION = oraclejdk7
+          - ELASTICSEARCH_VERSION = "2.1"

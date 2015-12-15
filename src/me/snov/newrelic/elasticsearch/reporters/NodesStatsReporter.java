@@ -152,20 +152,37 @@ public class NodesStatsReporter {
             reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Index/Rejected", "threads/second", nodeName,
                     nodeStats.thread_pool.index.rejected);
 
-            // Merge
-            // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
-                    nodeStats.thread_pool.merge.completed);
+            if (nodeStats.thread_pool.force_merge != null) {
+                // Merge
+                // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
+                        nodeStats.thread_pool.force_merge.completed);
 
-            // Merge: queue
-            // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
-            reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
-                    nodeStats.thread_pool.merge.queue);
+                // Merge: queue
+                // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
+                reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
+                        nodeStats.thread_pool.force_merge.queue);
 
-            // Merge: rejected
-            // Component/V1/NodeStats/ThreadPool/Merge/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads/second", nodeName,
-                    nodeStats.thread_pool.merge.rejected);
+                // Merge: rejected
+                // Component/V1/NodeStats/ThreadPool/Merge/Rejected/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads/second", nodeName,
+                        nodeStats.thread_pool.force_merge.rejected);
+            } else if (nodeStats.thread_pool.merge != null) {
+                // Merge
+                // Component/V1/NodeStats/ThreadPool/Merge/Completed/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Completed", "threads/second", nodeName,
+                        nodeStats.thread_pool.merge.completed);
+
+                // Merge: queue
+                // Component/V1/NodeStats/ThreadPool/Merge/Queue/*
+                reportNodeMetric("V1/NodeStats/ThreadPool/Merge/Queue", "threads", nodeName,
+                        nodeStats.thread_pool.merge.queue);
+
+                // Merge: rejected
+                // Component/V1/NodeStats/ThreadPool/Merge/Rejected/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Merge/Rejected", "threads/second", nodeName,
+                        nodeStats.thread_pool.merge.rejected);
+            }
 
             // Bulk
             // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
@@ -360,9 +377,8 @@ public class NodesStatsReporter {
 
         // Load average
         // Component/V1/NodeStats/Os/LoadAverage/*
-        if (nodeStats.os.load_average != null && nodeStats.os.load_average.size() > 0) {
-            reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName,
-                    nodeStats.os.load_average.get(0));
+        if (nodeStats.os.getLoadAverage() != null) {
+            reportNodeMetric("V1/NodeStats/Os/LoadAverage", "units", nodeName, nodeStats.os.getLoadAverage());
         }
 
         // Uptime

@@ -1,0 +1,113 @@
+{
+  "timestamp": 1450177715999,
+  "cluster_name": "elasticsearch",
+  "status": "green",
+  "indices": {
+    "count": 0,
+    "shards": {},
+    "docs": {
+      "count": 0,
+      "deleted": 0
+    },
+    "store": {
+      "size_in_bytes": 0,
+      "throttle_time_in_millis": 0
+    },
+    "fielddata": {
+      "memory_size_in_bytes": 0,
+      "evictions": 0
+    },
+    "query_cache": {
+      "memory_size_in_bytes": 0,
+      "total_count": 0,
+      "hit_count": 0,
+      "miss_count": 0,
+      "cache_size": 0,
+      "cache_count": 0,
+      "evictions": 0
+    },
+    "completion": {
+      "size_in_bytes": 0
+    },
+    "segments": {
+      "count": 0,
+      "memory_in_bytes": 0,
+      "terms_memory_in_bytes": 0,
+      "stored_fields_memory_in_bytes": 0,
+      "term_vectors_memory_in_bytes": 0,
+      "norms_memory_in_bytes": 0,
+      "doc_values_memory_in_bytes": 0,
+      "index_writer_memory_in_bytes": 0,
+      "index_writer_max_memory_in_bytes": 0,
+      "version_map_memory_in_bytes": 0,
+      "fixed_bit_set_memory_in_bytes": 0
+    },
+    "percolate": {
+      "total": 0,
+      "time_in_millis": 0,
+      "current": 0,
+      "memory_size_in_bytes": -1,
+      "memory_size": "-1b",
+      "queries": 0
+    }
+  },
+  "nodes": {
+    "count": {
+      "total": 1,
+      "master_only": 0,
+      "data_only": 0,
+      "master_data": 1,
+      "client": 0
+    },
+    "versions": [
+      "2.1.0"
+    ],
+    "os": {
+      "available_processors": 1,
+      "allocated_processors": 1,
+      "mem": {
+        "total_in_bytes": 0
+      },
+      "names": [
+        {
+          "name": "Linux",
+          "count": 1
+        }
+      ]
+    },
+    "process": {
+      "cpu": {
+        "percent": 0
+      },
+      "open_file_descriptors": {
+        "min": 95,
+        "max": 95,
+        "avg": 95
+      }
+    },
+    "jvm": {
+      "max_uptime_in_millis": 242552,
+      "versions": [
+        {
+          "version": "1.8.0_66-internal",
+          "vm_name": "OpenJDK 64-Bit Server VM",
+          "vm_version": "25.66-b17",
+          "vm_vendor": "Oracle Corporation",
+          "count": 1
+        }
+      ],
+      "mem": {
+        "heap_used_in_bytes": 53667240,
+        "heap_max_in_bytes": 1065025536
+      },
+      "threads": 22
+    },
+    "fs": {
+      "total_in_bytes": 19507089408,
+      "free_in_bytes": 17436667904,
+      "available_in_bytes": 16422166528,
+      "spins": "true"
+    },
+    "plugins": []
+  }
+}

@@ -1,6 +1,7 @@
 package me.snov.newrelic.elasticsearch.responses;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class NodesStats {
@@ -152,10 +153,20 @@ public class NodesStats {
             }
 
             public Number uptime_in_millis;
-            public ArrayList<Double> load_average;
+            private Object load_average;
             public Cpu cpu;
             public Mem mem;
             public Swap swap;
+
+            public Number getLoadAverage() {
+                if (load_average instanceof List && ((List) load_average).size() > 0) {
+                    return ((List<Number>) load_average).get(0);
+                } else if (load_average instanceof Number) {
+                    return (Number) load_average;
+                } else {
+                    return null;
+                }
+            }
         }
         public static class Process {
             public static class Cpu {
@@ -244,6 +255,7 @@ public class NodesStats {
             public ThreadPoolStats bench;
             public ThreadPoolStats get;
             public ThreadPoolStats snapshot;
+            public ThreadPoolStats force_merge;
             public ThreadPoolStats merge;
             public ThreadPoolStats suggest;
             public ThreadPoolStats bulk;
