@@ -18,7 +18,6 @@ jdk:
 
 before_install:
   - docker run -d -p 127.0.0.1:9200:9200 elasticsearch:$ELASTICSEARCH_VERSION
-  - sleep 5
 
 script:
   - ant
@@ -34,4 +33,4 @@ deploy:
         all_branches: true
         condition:
           - $TRAVIS_JDK_VERSION = oraclejdk7
-          - ELASTICSEARCH_VERSION = "2.1"
+          - $ELASTICSEARCH_VERSION = "2.1"
