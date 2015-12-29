@@ -47,7 +47,7 @@ public class ElasticsearchAgent extends Agent implements AgentInterface {
             throw new ConfigurationException("URL could not be parsed", e);
         } catch (IOException e) {
             throw new ConfigurationException(
-                String.format("Can't connect to elasticsearch at %s:%d", host, port),
+                String.format("Can't connect to elasticsearch at %s:%d. Error message was: %s", host, port, e.getMessage()),
                 e
             );
         }
