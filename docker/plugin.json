@@ -1,9 +1,10 @@
 {
+
   "agents": [
     {
-      "host" : "%HOST%",
-      "port" : %PORT%,
-      "_name": "%NAME%"
+      "host" : "elasticsearch",
+      "port" : 9200,
+      "_name": "Optional. By default loaded from elasticsearch. Rename to 'name' if you need to customize it"
     }
   ]
 }
