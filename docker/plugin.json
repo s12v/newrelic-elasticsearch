@@ -1,0 +1,9 @@
+{
+  "agents": [
+    {
+      "host" : "%HOST%",
+      "port" : %PORT%,
+      "_name": "%NAME%"
+    }
+  ]
+}
