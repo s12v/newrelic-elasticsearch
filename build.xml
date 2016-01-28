@@ -117,7 +117,7 @@
             </manifest>
             <fileset dir="${main.build.classes.dir}"/>
             <zipfileset src="${sdk.jar}" />
-                <zipfileset src="${gson.jar}" />
+            <zipfileset src="${gson.jar}" />
             <zipfileset src="${commons-codec.jar}" />
         </jar>
     </target>
