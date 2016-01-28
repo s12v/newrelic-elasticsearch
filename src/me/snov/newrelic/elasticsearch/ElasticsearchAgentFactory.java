@@ -17,6 +17,8 @@ public class ElasticsearchAgentFactory extends AgentFactory {
     @Override
     public Agent createConfiguredAgent(Map<String, Object> properties) throws ConfigurationException {
         String host = (String) properties.get("host");
+        String username = (String) properties.get("username");
+        String password = (String) properties.get("password");
         Long port = (Long) properties.get("port");
         String name = getClusterName(properties);
 
@@ -24,6 +26,6 @@ public class ElasticsearchAgentFactory extends AgentFactory {
             throw new ConfigurationException("'name' and 'host' cannot be null. Do you have a 'config/plugin.json' file?");
         }
 
-        return new ElasticsearchAgent(host, port.intValue(), name);
+        return new ElasticsearchAgent(host, port.intValue(), name, username, password);
     }
 }

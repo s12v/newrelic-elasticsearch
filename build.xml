@@ -27,15 +27,19 @@
     <property name="gson.jar" value="${lib.dir}/gson-2.3.1.jar" />
     <property name="junit.jar" value="${lib.dir}/junit-4.12.jar" />
     <property name="hamcrest.jar" value="${lib.dir}/hamcrest-core-1.3.jar" />
+    <property name="commons-codec.jar" value="${lib.dir}/commons-codec-1.10.jar" />
+
 
     <path id="classpath">
         <pathelement location="${sdk.jar}" />
         <pathelement location="${gson.jar}" />
+        <pathelement location="${commons-codec.jar}" />
     </path>
 
     <path id="classpath.test">
         <pathelement location="${sdk.jar}" />
         <pathelement location="${gson.jar}" />
+        <pathelement location="${commons-codec.jar}" />
         <pathelement location="${junit.jar}" />
     </path>
 
