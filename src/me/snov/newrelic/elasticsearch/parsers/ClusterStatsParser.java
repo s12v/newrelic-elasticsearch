@@ -10,10 +10,10 @@ public class ClusterStatsParser extends AbstractParser<ClusterStats> {
     private static final String URL_CLUSTER_STATS = "/_cluster/stats";
 
     public ClusterStatsParser() {
-        super(ClusterStats.class, null);
+        super(ClusterStats.class, null, null, null);
     }
 
-    public ClusterStatsParser(String host, Integer port) throws MalformedURLException {
-        super(ClusterStats.class, new URL(HTTP, host, port, URL_CLUSTER_STATS));
+    public ClusterStatsParser(String host, Integer port, String username, String password) throws MalformedURLException {
+        super(ClusterStats.class, new URL(HTTP, host, port, URL_CLUSTER_STATS), username, password);
     }
 }

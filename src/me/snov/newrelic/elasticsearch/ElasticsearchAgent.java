@@ -33,12 +33,12 @@ public class ElasticsearchAgent extends Agent implements AgentInterface {
     /**
      * Constructor for Elastisearch Agent
      */
-    public ElasticsearchAgent(String host, Integer port, String name) throws ConfigurationException {
+    public ElasticsearchAgent(String host, Integer port, String name, String username, String password) throws ConfigurationException {
         super(GUID, VERSION);
         try {
             logger = Logger.getLogger(ElasticsearchAgent.class);
-            clusterStatsParser = new ClusterStatsParser(host, port);
-            nodesStatsParser = new NodesStatsParser(host, port);
+            clusterStatsParser = new ClusterStatsParser(host, port, username, password);
+            nodesStatsParser = new NodesStatsParser(host, port, username, password);
             clusterStatsService = new ClusterStatsService();
             clusterName = (name != null && name.length() > 0)
                 ? name
