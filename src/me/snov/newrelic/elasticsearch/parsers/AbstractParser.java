@@ -36,7 +36,8 @@ abstract class AbstractParser<T> {
         connection.addRequestProperty("Accept", "application/json");
 
         // If we have basic authentication credentials defined, generate the Authorization header.
-        if (username != null && password != null ) {
+        if (username != null && password != null
+                && !username.isEmpty() && !password.isEmpty()) {
             String authString = username + ":" + password;
             byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
             String authStringEnc = new String(authEncBytes);
