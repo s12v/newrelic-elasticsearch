@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/s12v/newrelic-elasticsearch.svg?branch=master)](https://travis-ci.org/s12v/newrelic-elasticsearch)
+[![codecov.io](https://codecov.io/github/s12v/newrelic-elasticsearch/coverage.svg?branch=master)](https://codecov.io/github/s12v/newrelic-elasticsearch?branch=master)
 
 # Newrelic elasticsearch plugin
 
