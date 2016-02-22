@@ -1,14 +1,9 @@
 .idea
 *.iml
-
-.classpath
-.project
-bin/
+/.gradle
+/gradle*
 build/
 config/newrelic.json
-dist/
 lib/*
 !lib/metrics_publish-*.jar
 logs/
-META-INF/
-out/

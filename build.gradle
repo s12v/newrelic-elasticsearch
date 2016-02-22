@@ -1,0 +1,68 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+
+version = '2.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('lib/metrics_publish-2.0.1.jar')
+    compile 'com.google.code.gson:gson:2.6.1'
+    compile 'commons-codec:commons-codec:1.10'
+    testCompile 'junit:junit:4.12'
+}
+
+task copyTestResources(type: Copy) {
+    from "${projectDir}/src/test/resources"
+    into "${buildDir}/classes/test/resources"
+}
+processTestResources.dependsOn copyTestResources
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
+def getDateTime() {
+    return new SimpleDateFormat("YYYYMMDDHHmm").format(new Date());
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Specification-Title': 'New Relic Elasticsearch Plugin'
+        attributes 'Specification-Vendor': 'Sergey Novikov'
+        attributes 'Implementation-Vendor': 'Sergey Novikov'
+        attributes 'Built-Date': getDateTime()
+        attributes 'Specification-Version': version
+        attributes 'Implementation-Version': "${version}-${getDateTime()}"
+        attributes 'Main-Class': 'me.snov.newrelic.elasticsearch.Main'
+    }
+    baseName = 'plugin'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task dist(type: Tar) {
+    baseName 'newrelic-elasticsearch-plugin'
+    extension = 'tar.gz'
+    compression Compression.GZIP
+    into('config') {
+        from 'config', 'config'
+    }
+    from 'LICENSE'
+    from "${buildDir}/libs"
+    rename 'plugin-(.*).jar', 'plugin.jar'
+}
+dist.dependsOn fatJar
+
