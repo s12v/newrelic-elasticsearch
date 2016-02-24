@@ -11,6 +11,7 @@ env:
   - ELASTICSEARCH_VERSION="1.7"
   - ELASTICSEARCH_VERSION="2.0"
   - ELASTICSEARCH_VERSION="2.1"
+  - ELASTICSEARCH_VERSION="2.2"
 
 jdk:
   - oraclejdk7
@@ -37,4 +38,4 @@ deploy:
         all_branches: true
         condition:
           - $TRAVIS_JDK_VERSION = oraclejdk7
-          - $ELASTICSEARCH_VERSION = "2.1"
+          - $ELASTICSEARCH_VERSION = "1.3"
