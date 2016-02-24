@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-version = '2.1.0'
+version = '2.1.1'
 
 repositories {
     mavenCentral()
@@ -61,8 +61,10 @@ task dist(type: Tar) {
         from 'config', 'config'
     }
     from 'LICENSE'
-    from "${buildDir}/libs"
-    rename 'plugin-(.*).jar', 'plugin.jar'
+    from("${buildDir}/libs") {
+        include 'plugin*'
+        rename 'plugin-(.*).jar', 'plugin.jar'
+    }
 }
 dist.dependsOn fatJar
 

@@ -20,7 +20,7 @@ import java.net.MalformedURLException;
 public class ElasticsearchAgent extends Agent implements AgentInterface {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "2.1.0";
+    private static final String VERSION = "2.1.1";
 
     private final String clusterName;
     private final ClusterStatsParser clusterStatsParser;
