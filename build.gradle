@@ -62,9 +62,9 @@ task dist(type: Tar) {
     }
     from 'LICENSE'
     from("${buildDir}/libs") {
-        include "plugin-(.*).jar"
+        include 'plugin*'
+        rename 'plugin-(.*).jar', 'plugin.jar'
     }
-    rename 'plugin-(.*).jar', 'plugin.jar'
 }
 dist.dependsOn fatJar
 
