@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-version = '2.1.0'
+version = '2.1.1'
 
 repositories {
     mavenCentral()
@@ -57,12 +57,16 @@ task dist(type: Tar) {
     baseName 'newrelic-elasticsearch-plugin'
     extension = 'tar.gz'
     compression Compression.GZIP
-    into('config') {
-        from 'config', 'config'
+    into("newrelic-elasticsearch-plugin-${version}") {
+        from 'LICENSE'
+        into("config") {
+            from 'config', 'config'
+        }
+        from("${buildDir}/libs") {
+            include 'plugin*'
+            rename 'plugin-(.*).jar', 'plugin.jar'
+        }
     }
-    from 'LICENSE'
-    from "${buildDir}/libs"
-    rename 'plugin-(.*).jar', 'plugin.jar'
 }
 dist.dependsOn fatJar
 
