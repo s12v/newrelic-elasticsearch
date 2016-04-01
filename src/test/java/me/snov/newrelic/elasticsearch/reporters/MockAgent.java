@@ -1,4 +1,4 @@
-package me.snov.newrelic.elasticsearch.services;
+package me.snov.newrelic.elasticsearch.reporters;
 
 import me.snov.newrelic.elasticsearch.interfaces.AgentInterface;
 
