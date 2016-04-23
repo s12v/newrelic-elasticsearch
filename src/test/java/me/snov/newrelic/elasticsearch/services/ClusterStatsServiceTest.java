@@ -26,9 +26,6 @@ public class ClusterStatsServiceTest {
     }
 
     private ClusterStats parseJson(String path) throws IOException {
-
-        URL url = getClass().getResource("/resources/cluster_stats_version_mismatch.json");
-
         return clusterStatsParser.parse(getClass().getResourceAsStream(path));
     }
 

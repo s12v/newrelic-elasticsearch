@@ -1,16 +1,21 @@
 package me.snov.newrelic.elasticsearch.reporters;
 
+import me.snov.newrelic.elasticsearch.IntegrationTest;
 import me.snov.newrelic.elasticsearch.parsers.NodesStatsParser;
 import me.snov.newrelic.elasticsearch.responses.NodesStats;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
 public class NodesStatsReporterTest {
+
+    private static final String nodesStatsUrl = "http://localhost:9200/_nodes/stats";
 
     private MockAgent agent;
     private NodesStatsParser parser;
@@ -33,6 +38,10 @@ public class NodesStatsReporterTest {
     
     private NodesStats parseJsonFromFile(String path) throws IOException {
         return parseJson(getClass().getResourceAsStream(path));
+    }
+
+    private NodesStats parseJsonFromUrl(String url) throws IOException {
+        return parseJson(new URL(url).openConnection().getInputStream());
     }
 
     @Test
@@ -73,6 +82,14 @@ public class NodesStatsReporterTest {
     @Test
     public void testReportNodesStatsV211() throws Exception {
         NodesStats nodesStats = parseJsonFromFile("/resources/nodes_stats_2.1.1.json");
+        reporter.reportNodesStats(nodesStats);
+        assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
+    }
+
+    @Test
+    @Category(IntegrationTest.class)
+    public void testReportNodesStatsIntegration() throws Exception {
+        NodesStats nodesStats = parseJsonFromUrl(nodesStatsUrl);
         reporter.reportNodesStats(nodesStats);
         assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
     }
