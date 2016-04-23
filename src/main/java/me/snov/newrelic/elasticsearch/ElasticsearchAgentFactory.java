@@ -1,18 +1,18 @@
 package me.snov.newrelic.elasticsearch;
 
-import java.util.Map;
-
 import com.newrelic.metrics.publish.Agent;
 import com.newrelic.metrics.publish.AgentFactory;
 import com.newrelic.metrics.publish.configuration.ConfigurationException;
+import me.snov.newrelic.elasticsearch.parsers.ClusterStatsParser;
+import me.snov.newrelic.elasticsearch.parsers.NodesStatsParser;
+import me.snov.newrelic.elasticsearch.reporters.ClusterStatsReporter;
+import me.snov.newrelic.elasticsearch.reporters.NodesStatsReporter;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Map;
 
 public class ElasticsearchAgentFactory extends AgentFactory {
-
-    private String getClusterName(Map<String, Object> properties) {
-        return properties.containsKey("name")
-            ? (String) properties.get("name")
-            : null;
-    }
 
     @Override
     public Agent createConfiguredAgent(Map<String, Object> properties) throws ConfigurationException {
@@ -20,12 +20,28 @@ public class ElasticsearchAgentFactory extends AgentFactory {
         String username = (String) properties.get("username");
         String password = (String) properties.get("password");
         Long port = (Long) properties.get("port");
-        String name = getClusterName(properties);
+        String name = (String) properties.get("name");
 
         if (host == null || port == null) {
-            throw new ConfigurationException("'name' and 'host' cannot be null. Do you have a 'config/plugin.json' file?");
+            throw new ConfigurationException("'host' and 'port' must be specified. Do you have a 'config/plugin.json' file?");
         }
 
-        return new ElasticsearchAgent(host, port.intValue(), name, username, password);
+        try {
+            ClusterStatsParser clusterStatsParser = new ClusterStatsParser(host, port.intValue(), username, password);
+            String clusterName = name != null && name.length() > 0  ? name  : clusterStatsParser.request().cluster_name;
+            ElasticsearchAgent agent = new ElasticsearchAgent(clusterName);
+
+            ClusterStatsReporter clusterStatsReporter = new ClusterStatsReporter(agent);
+            NodesStatsParser nodeStatsParser = new NodesStatsParser(host, port.intValue(), username, password);
+            NodesStatsReporter nodeStatsReporter = new NodesStatsReporter(agent);
+            agent.configure(clusterStatsParser, clusterStatsReporter, nodeStatsParser, nodeStatsReporter);
+
+            return agent;
+        } catch (MalformedURLException e) {
+            throw new ConfigurationException(String.format("URL could not be parsed: %s", e.getMessage()));
+        } catch (IOException e) {
+            throw new ConfigurationException(
+                    String.format("Can't connect to elasticsearch at %s:%d: %s", host, port, e.getMessage()), e);
+        }
     }
 }

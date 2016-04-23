@@ -24,4 +24,12 @@ public class ClusterStatsService {
             ? 0
             : getNumberOfVersions(clusterStats.nodes.versions);
     }
+
+    public boolean isYellow(ClusterStats clusterStats) {
+        return "yellow".equals(clusterStats.status);
+    }
+
+    public boolean isRed(ClusterStats clusterStats) {
+        return "red".equals(clusterStats.status);
+    }
 }

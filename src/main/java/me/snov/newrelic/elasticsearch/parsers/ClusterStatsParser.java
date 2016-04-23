@@ -13,7 +13,7 @@ public class ClusterStatsParser extends AbstractParser<ClusterStats> {
         super(ClusterStats.class, null, null, null);
     }
 
-    public ClusterStatsParser(String host, Integer port, String username, String password) throws MalformedURLException {
+    public ClusterStatsParser(String host, int port, String username, String password) throws MalformedURLException {
         super(ClusterStats.class, new URL(HTTP, host, port, URL_CLUSTER_STATS), username, password);
     }
 }
