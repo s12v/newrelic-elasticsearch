@@ -15,6 +15,10 @@ env:
   - ELASTICSEARCH_VERSION="2.3"
   - ELASTICSEARCH_VERSION="5.0"
 
+matrix:
+  allow_failures:
+    - env: ELASTICSEARCH_VERSION="5.0"
+
 jdk:
   - oraclejdk7
   - oraclejdk8
@@ -24,7 +28,7 @@ before_install:
   - pip install --user codecov
 
 script:
-  - gradle clean build test integrationTest jacocoTestReport dist
+  - gradle clean build integrationTest jacocoTestReport dist
 
 after_success:
   - codecov
