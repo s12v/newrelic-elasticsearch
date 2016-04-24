@@ -23,6 +23,18 @@ task copyTestResources(type: Copy) {
 }
 processTestResources.dependsOn copyTestResources
 
+test {
+    useJUnit {
+        excludeCategories 'me.snov.newrelic.elasticsearch.IntegrationTest'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        includeCategories 'me.snov.newrelic.elasticsearch.IntegrationTest'
+    }
+}
+
 tasks.withType(Test) {
     testLogging {
         events "passed", "skipped", "failed"
