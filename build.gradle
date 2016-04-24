@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 apply plugin: 'java'
 apply plugin: 'jacoco'
 
-version = '2.1.1'
+// me.snov.newrelic.elasticsearch.ElasticsearchAgent
+version = '2.2.0'
 
 repositories {
     mavenCentral()
