@@ -11,7 +11,7 @@ http://newrelic.com/plugins/sergey-novikov/299
 
 ## Installation
 
-### Simple interactive installation with NPI
+### Interactive installation with New Relic NPI
 
 See https://docs.newrelic.com/docs/plugins/plugins-new-relic/installing-plugins/installing-npi-compatible-plugin
 ```
@@ -20,4 +20,8 @@ See https://docs.newrelic.com/docs/plugins/plugins-new-relic/installing-plugins/
 
 ### Docker
 
-See https://hub.docker.com/r/s12v/newrelic-elasticsearch/
+```
+docker run -e "ES_HOST=localhost" -e "NEW_RELIC_LICENSE_KEY=..." s12v/newrelic-elasticsearch
+```
+
+More details: https://hub.docker.com/r/s12v/newrelic-elasticsearch/
