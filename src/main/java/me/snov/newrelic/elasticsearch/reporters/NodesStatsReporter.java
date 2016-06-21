@@ -356,11 +356,10 @@ public class NodesStatsReporter {
             return;
         }
 
-        if (nodeStats.os.cpu != null) {
+        if (nodeStats.process != null && nodeStats.process.cpu != null && nodeStats.process.cpu.percent != null) {
             // CPU used, %
             // Component/V1/NodeStats/Os/Cpu/Usage/*
-            reportNodeMetric("V1/NodeStats/Os/Cpu/Usage", "percent", nodeName,
-                    nodeStats.os.cpu.usage);
+            reportNodeMetric("V1/NodeStats/Os/Cpu/Usage", "percent", nodeName, nodeStats.process.cpu.percent);
         }
 
         if (nodeStats.os.mem != null) {
