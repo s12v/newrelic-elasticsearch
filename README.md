@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/s12v/newrelic-elasticsearch.svg?branch=master)](https://travis-ci.org/s12v/newrelic-elasticsearch)
 [![codecov](https://codecov.io/gh/s12v/newrelic-elasticsearch/branch/master/graph/badge.svg)](https://codecov.io/gh/s12v/newrelic-elasticsearch)
+[![Docker Pulls](https://img.shields.io/docker/pulls/s12v/newrelic-elasticsearch.svg?maxAge=2592000)]()
 
 # Newrelic elasticsearch plugin
 
