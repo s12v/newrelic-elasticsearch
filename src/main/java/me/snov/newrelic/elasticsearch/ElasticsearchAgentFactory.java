@@ -36,6 +36,10 @@ public class ElasticsearchAgentFactory extends AgentFactory {
             basePath = "";
         }
 
+        if (basePath.endsWith("/")) {
+            basePath = basePath.substring(0, basePath.length() - 1);
+        }
+
         try {
             ClusterStatsParser clusterStatsParser = new ClusterStatsParser(protocol, host, port.intValue(), basePath, username, password);
             String clusterName = name != null && name.length() > 0  ? name  : clusterStatsParser.request().cluster_name;
