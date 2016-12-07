@@ -13,7 +13,7 @@ public class NodesStatsParser extends AbstractParser<NodesStats> {
         super(NodesStats.class, null, null, null);
     }
 
-    public NodesStatsParser(String host, int port, String username, String password) throws MalformedURLException {
-        super(NodesStats.class, new URL(HTTP, host, port, URL_CLUSTER_STATS), username, password);
+    public NodesStatsParser(String protocol, String host, int port, String basePath, String username, String password) throws MalformedURLException {
+        super(NodesStats.class, new URL(protocol, host, port, basePath + URL_CLUSTER_STATS), username, password);
     }
 }
