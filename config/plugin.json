@@ -5,6 +5,8 @@
       "port" : 9200,
       "username": "",
       "password": "",
+      "_protocol": "Optional. Default 'http'. Rename to 'protocol' and set to 'https' if needed.",
+      "_basePath": "Optional. API path on server. Default '/'. Rename to 'basePath' if you need to customize it",
       "_name": "Optional. By default loaded from elasticsearch. Rename to 'name' if you need to customize it"
     }
   ]

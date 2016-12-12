@@ -12,8 +12,6 @@ import java.net.URL;
 
 abstract class AbstractParser<T> {
 
-    protected static final String HTTP = "http";
-
     private final Class<T> typeParameterClass;
     private final URL url;
     private final Gson gson;

@@ -17,6 +17,8 @@ public class ElasticsearchAgentFactory extends AgentFactory {
     @Override
     public Agent createConfiguredAgent(Map<String, Object> properties) throws ConfigurationException {
         String host = (String) properties.get("host");
+        String protocol = (String) properties.get("protocol");
+        String basePath = (String) properties.get("basePath");
         String username = (String) properties.get("username");
         String password = (String) properties.get("password");
         Long port = (Long) properties.get("port");
@@ -26,13 +28,25 @@ public class ElasticsearchAgentFactory extends AgentFactory {
             throw new ConfigurationException("'host' and 'port' must be specified. Do you have a 'config/plugin.json' file?");
         }
 
+        if (protocol == null) {
+            protocol = "http";
+        }
+
+        if (basePath == null) {
+            basePath = "";
+        }
+
+        if (basePath.endsWith("/")) {
+            basePath = basePath.substring(0, basePath.length() - 1);
+        }
+
         try {
-            ClusterStatsParser clusterStatsParser = new ClusterStatsParser(host, port.intValue(), username, password);
+            ClusterStatsParser clusterStatsParser = new ClusterStatsParser(protocol, host, port.intValue(), basePath, username, password);
             String clusterName = name != null && name.length() > 0  ? name  : clusterStatsParser.request().cluster_name;
             ElasticsearchAgent agent = new ElasticsearchAgent(clusterName);
 
             ClusterStatsReporter clusterStatsReporter = new ClusterStatsReporter(agent);
-            NodesStatsParser nodeStatsParser = new NodesStatsParser(host, port.intValue(), username, password);
+            NodesStatsParser nodeStatsParser = new NodesStatsParser(protocol, host, port.intValue(), basePath, username, password);
             NodesStatsReporter nodeStatsReporter = new NodesStatsReporter(agent);
             agent.configure(clusterStatsParser, clusterStatsReporter, nodeStatsParser, nodeStatsReporter);
 
