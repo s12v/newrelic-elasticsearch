@@ -87,6 +87,13 @@ public class NodesStatsReporterTest {
     }
 
     @Test
+    public void testReportNodesStatsV511() throws Exception {
+        NodesStats nodesStats = parseJsonFromFile("/resources/nodes_stats_5.1.1.json");
+        reporter.reportNodesStats(nodesStats);
+        assertTrue("Number of reported metrics > 0", agent.getReportedMetricsCount() > 0);
+    }
+
+    @Test
     @Category(IntegrationTest.class)
     public void testReportNodesStatsIntegration() throws Exception {
         NodesStats nodesStats = parseJsonFromUrl(nodesStatsUrl);

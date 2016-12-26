@@ -1,0 +1,149 @@
+{
+  "_nodes": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "cluster_name": "elasticsearch",
+  "timestamp": 1482735851082,
+  "status": "yellow",
+  "indices": {
+    "count": 2,
+    "shards": {
+      "total": 10,
+      "primaries": 10,
+      "replication": 0.0,
+      "index": {
+        "shards": {
+          "min": 5,
+          "max": 5,
+          "avg": 5.0
+        },
+        "primaries": {
+          "min": 5,
+          "max": 5,
+          "avg": 5.0
+        },
+        "replication": {
+          "min": 0.0,
+          "max": 0.0,
+          "avg": 0.0
+        }
+      }
+    },
+    "docs": {
+      "count": 6596,
+      "deleted": 237
+    },
+    "store": {
+      "size_in_bytes": 2809788,
+      "throttle_time_in_millis": 0
+    },
+    "fielddata": {
+      "memory_size_in_bytes": 0,
+      "evictions": 0
+    },
+    "query_cache": {
+      "memory_size_in_bytes": 480,
+      "total_count": 1719,
+      "hit_count": 818,
+      "miss_count": 901,
+      "cache_size": 30,
+      "cache_count": 35,
+      "evictions": 5
+    },
+    "completion": {
+      "size_in_bytes": 0
+    },
+    "segments": {
+      "count": 96,
+      "memory_in_bytes": 707076,
+      "terms_memory_in_bytes": 739924,
+      "stored_fields_memory_in_bytes": 147296,
+      "term_vectors_memory_in_bytes": 0,
+      "norms_memory_in_bytes": 29248,
+      "points_memory_in_bytes": 8624,
+      "doc_values_memory_in_bytes": 81984,
+      "index_writer_memory_in_bytes": 0,
+      "version_map_memory_in_bytes": 0,
+      "fixed_bit_set_memory_in_bytes": 0,
+      "max_unsafe_auto_id_timestamp": -1,
+      "file_sizes": {
+
+      }
+    }
+  },
+  "nodes": {
+    "count": {
+      "total": 1,
+      "data": 1,
+      "coordinating_only": 0,
+      "master": 1,
+      "ingest": 1
+    },
+    "versions": [
+      "5.1.1"
+    ],
+    "os": {
+      "available_processors": 20,
+      "allocated_processors": 20,
+      "names": [
+        {
+          "name": "Linux",
+          "count": 1
+        }
+      ],
+      "mem": {
+        "total_in_bytes": 6442466816,
+        "free_in_bytes": 60727552,
+        "used_in_bytes": 6841739264,
+        "free_percent": 1,
+        "used_percent": 99
+      }
+    },
+    "process": {
+      "cpu": {
+        "percent": 0
+      },
+      "open_file_descriptors": {
+        "min": 475,
+        "max": 475,
+        "avg": 475
+      }
+    },
+    "jvm": {
+      "max_uptime_in_millis": 229077263,
+      "versions": [
+        {
+          "version": "1.8.0_111",
+          "vm_name": "Java HotSpot(TM) 64-Bit Server VM",
+          "vm_version": "25.111-b14",
+          "vm_vendor": "Oracle Corporation",
+          "count": 1
+        }
+      ],
+      "mem": {
+        "heap_used_in_bytes": 998168520,
+        "heap_max_in_bytes": 2075918336
+      },
+      "threads": 183
+    },
+    "fs": {
+      "total_in_bytes": 1948795334656,
+      "free_in_bytes": 754496978944,
+      "available_in_bytes": 655480262656,
+      "spins": "true"
+    },
+    "plugins": [
+
+    ],
+    "network_types": {
+      "transport_types": {
+        "netty4": 1
+      },
+      "http_types": {
+        "netty4": 1
+      }
+    }
+  }
+}
