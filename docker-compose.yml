@@ -1,4 +1,6 @@
-es:
-  image: elasticsearch:2.1
-  ports:
-  - "9200:9200"
+version: "2"
+services:
+  es24:
+    image: elasticsearch:2.4
+    ports:
+    - "9200:9200"
