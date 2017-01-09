@@ -16,7 +16,7 @@ import java.io.IOException;
 public class ElasticsearchAgent extends Agent implements AgentInterface {
 
     private static final String GUID = "me.snov.newrelic-elasticsearch";
-    private static final String VERSION = "2.2.1";
+    private static final String VERSION = "2.3.0";
 
     private final String clusterName;
     private final Logger logger;
