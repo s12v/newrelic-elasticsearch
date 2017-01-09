@@ -25,6 +25,7 @@ jdk:
   - oraclejdk8
 
 before_install:
+  - sudo sysctl -w vm.max_map_count=262144
   - docker run -d -p 127.0.0.1:9200:9200 elasticsearch:$ELASTICSEARCH_VERSION
   - pip install --user codecov
 
