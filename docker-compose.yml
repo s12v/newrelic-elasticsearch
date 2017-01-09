@@ -4,3 +4,7 @@ services:
     image: elasticsearch:2.4
     ports:
     - "9200:9200"
+  es5:
+    image: elasticsearch:5-alpine
+    ports:
+    - "9200:9200"

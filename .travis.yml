@@ -8,23 +8,25 @@ env:
   - ELASTICSEARCH_VERSION="1.4"
   - ELASTICSEARCH_VERSION="1.5"
   - ELASTICSEARCH_VERSION="1.6"
-  - ELASTICSEARCH_VERSION="1.7"
+  - ELASTICSEARCH_VERSION="1.7-alpine"
   - ELASTICSEARCH_VERSION="2.0"
   - ELASTICSEARCH_VERSION="2.1"
   - ELASTICSEARCH_VERSION="2.2"
   - ELASTICSEARCH_VERSION="2.3"
-  - ELASTICSEARCH_VERSION="2.4"
-  - ELASTICSEARCH_VERSION="5.0"
+  - ELASTICSEARCH_VERSION="2.4-alpine"
+  - ELASTICSEARCH_VERSION="5-alpine"
+  - ELASTICSEARCH_VERSION="latest"
 
 matrix:
   allow_failures:
-    - env: ELASTICSEARCH_VERSION="5.0"
+    - env: ELASTICSEARCH_VERSION="latest"
 
 jdk:
   - oraclejdk7
   - oraclejdk8
 
 before_install:
+  - sudo sysctl -w vm.max_map_count=262144
   - docker run -d -p 127.0.0.1:9200:9200 elasticsearch:$ELASTICSEARCH_VERSION
   - pip install --user codecov
 
