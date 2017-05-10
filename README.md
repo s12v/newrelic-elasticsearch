@@ -16,13 +16,16 @@ First, build the plugin jar file:
 
     gradle fatjar
 
+or:
+    make build
+
 Build the image:
 
     docker build -t newrelic-elasticsearch .
 
 or:
 
-    make build
+    make build_image
 
 Make a proper envfile. For an example, see env.sample.
 
