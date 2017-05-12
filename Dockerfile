@@ -1,4 +1,5 @@
 FROM java:8-jre
+MAINTAINER infrastructure-team@points.com
 ENV NEW_RELIC_LICENSE_KEY deadbeefcafebabe
 RUN apt-get update && apt-get install -y gettext-base
 RUN UNATTENDED=true bash -c "$(curl -sSL https://download.newrelic.com/npi/release/install-npi-linux-debian-x64.sh)"
