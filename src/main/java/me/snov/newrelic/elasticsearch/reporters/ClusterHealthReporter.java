@@ -33,7 +33,7 @@ public class ClusterHealthReporter {
         agent.reportMetric("V1/ClusterHealth/Tasks/Count/Pending", "tasks", ClusterHealth.number_of_pending_tasks);
         agent.reportMetric("V1/ClusterHealth/Tasks/Max Wait In Queue Millis", "tasks", ClusterHealth.task_max_waiting_in_queue_millis);
         
-        agent.reportMetric("V1/ClusterHealth/Timed Out", "other", ClusterHealth.timed_out);
+        agent.reportMetric("V1/ClusterHealth/Timed Out", "other", asInt(ClusterHealth.timed_out));
         agent.reportMetric("V1/ClusterHealth/Number Inflight Fetch", "other", ClusterHealth.number_of_in_flight_fetch);
 
     }

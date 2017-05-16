@@ -7,11 +7,11 @@ import java.util.List;
 
 public class ClusterHealthService {
 
-	public boolean isYellow(ClusterHealth ClusterHealth) {
-		return "yellow".equals(ClusterHealth.status);
+	public boolean isYellow(ClusterHealth clusterHealth) {
+		return "yellow".equals(clusterHealth.status);
 	}
 
-	public boolean isRed(ClusterHealth ClusterHealth) {
-		return "red".equals(ClusterHealth.status);
+	public boolean isRed(ClusterHealth clusterHealth) {
+		return "red".equals(clusterHealth.status);
 	}
 }
