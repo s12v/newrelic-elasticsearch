@@ -35,7 +35,7 @@ public class ClusterStatsReporter {
         // Component/V1/ClusterStats/Indices/Group1/*
         agent.reportMetric("V1/ClusterStats/Indices/Group1/Indices", "indices", clusterStats.indices.count);
         agent.reportMetric("V1/ClusterStats/Indices/Group1/Shards", "shards", clusterStats.indices.shards.total);
-        agent.reportMetric("V1/ClusterStats/Indices/Group1/Primaries", "shards", clusterStats.indices.shards.total);
+        agent.reportMetric("V1/ClusterStats/Indices/Group1/Primaries", "shards", clusterStats.indices.shards.primaries);
         agent.reportMetric("V1/ClusterStats/Indices/Group1/Replication", "shards", clusterStats.indices.shards.replication);
 
         // Component/V1/ClusterStats/Indices/Segments/Count
