@@ -12,17 +12,20 @@ http://newrelic.com/plugins/sergey-novikov/299
 
 ## Installation
 
-### Interactive installation with New Relic NPI
+First, build the plugin jar file:
 
-See https://docs.newrelic.com/docs/plugins/plugins-new-relic/installing-plugins/installing-npi-compatible-plugin
-```
-./npi install me.snov.newrelic-elasticsearch
-```
+    gradle fatjar
 
-### Docker
+Build the image:
 
-```
-docker run -e "ES_HOST=localhost" -e "NEW_RELIC_LICENSE_KEY=..." s12v/newrelic-elasticsearch
-```
+    docker build -t newrelic-elasticsearch .
 
-More details: https://hub.docker.com/r/s12v/newrelic-elasticsearch/
+or:
+
+    make build
+
+Make a proper envfile. For an example, see env.sample.
+
+Run the container:
+
+    docker run --env-file=envfile newrelic-elasticsearch

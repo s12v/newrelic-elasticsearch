@@ -1,0 +1,9 @@
+{
+  "download_url": "",
+  "guid": "me.snov.newrelic-elasticsearch",
+  "implementation": "Java",
+  "installer_compatible": true,
+  "publisher_name": "Sergey Novikov",
+  "publisher_support_url": "https://github.com/Points/newrelic-elasticsearch/issues",
+  "version": "2.3.0"
+}
