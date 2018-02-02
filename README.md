@@ -26,3 +26,10 @@ docker run -e "ES_HOST=localhost" -e "NEW_RELIC_LICENSE_KEY=..." s12v/newrelic-e
 ```
 
 More details: https://hub.docker.com/r/s12v/newrelic-elasticsearch/
+
+### Building from source
+
+```
+gradle dist
+ls build/distributions/
+```
