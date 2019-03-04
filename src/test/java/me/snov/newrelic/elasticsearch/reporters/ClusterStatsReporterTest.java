@@ -21,7 +21,7 @@ public class ClusterStatsReporterTest {
     @Before
     public void setUp() throws Exception {
         clusterStatsReporter = new ClusterStatsReporter(agent);
-        clusterStats = new ClusterStatsParser().parse(getClass().getResourceAsStream("/resources/cluster_stats_2.1.1.json"));
+        clusterStats = new ClusterStatsParser().parse(getClass().getResourceAsStream("/cluster_stats_2.1.1.json"));
     }
 
     @Test

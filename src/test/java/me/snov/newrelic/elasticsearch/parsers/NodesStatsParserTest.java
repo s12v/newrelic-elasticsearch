@@ -30,8 +30,22 @@ public class NodesStatsParserTest {
     }
 
     @Test
+    public void testV661() throws Exception {
+        NodesStats nodesStats = parseJson("/nodes_stats_6.6.1.json");
+//        assertThat(nodesStats.nodes.size(), is(1));
+//        assertThat(nodesStats.nodes.get("foobart-xxx").name, is("foobar"));
+    }
+
+    @Test
+    public void testV511() throws Exception {
+        NodesStats nodesStats = parseJson("/nodes_stats_5.1.1.json");
+        assertThat(nodesStats.nodes.size(), is(1));
+        assertThat(nodesStats.nodes.get("foobart-xxx").name, is("foobar"));
+    }
+
+    @Test
     public void testV211() throws Exception {
-        NodesStats nodesStats = parseJson("/resources/nodes_stats_2.1.1.json");
+        NodesStats nodesStats = parseJson("/nodes_stats_2.1.1.json");
         assertThat(nodesStats.nodes.size(), is(2));
         assertThat(nodesStats.nodes.get("nfxaGjN8QLqmru6bA2RoxQ").name, is("Everyman"));
         assertThat(nodesStats.nodes.get("88CFbaIcRLql01dB6I0FCw").name, is("Foolkiller"));
@@ -39,7 +53,7 @@ public class NodesStatsParserTest {
 
     @Test
     public void testV134() throws Exception {
-        NodesStats nodesStats = parseJson("/resources/nodes_stats_1.3.4.json");
+        NodesStats nodesStats = parseJson("/nodes_stats_1.3.4.json");
         assertEquals(3, nodesStats.nodes.size());
         assertEquals(200L, nodesStats.nodes.get("lNFk2gshR5GVDPmRrnDyoA")
             .jvm.gc.collectors.young.collection_time_in_millis.longValue());
