@@ -186,20 +186,22 @@ public class NodesStatsReporter {
                         nodeStats.thread_pool.merge.rejected);
             }
 
-            // Bulk
-            // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
-                    nodeStats.thread_pool.bulk.completed);
+            if (nodeStats.thread_pool.bulk != null) {
+                // Bulk
+                // Component/V1/NodeStats/ThreadPool/Bulk/Completed/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Completed", "threads/second", nodeName,
+                        nodeStats.thread_pool.bulk.completed);
 
-            // Bulk: queue
-            // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
-            reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
-                    nodeStats.thread_pool.bulk.queue);
+                // Bulk: queue
+                // Component/V1/NodeStats/ThreadPool/Bulk/Queue/*
+                reportNodeMetric("V1/NodeStats/ThreadPool/Bulk/Queue", "threads", nodeName,
+                        nodeStats.thread_pool.bulk.queue);
 
-            // Bulk: rejected
-            // Component/V1/NodeStats/ThreadPool/Bulk/Rejected/*
-            reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Rejected", "threads/second", nodeName,
-                    nodeStats.thread_pool.bulk.rejected);
+                // Bulk: rejected
+                // Component/V1/NodeStats/ThreadPool/Bulk/Rejected/*
+                reportNodeProcessedMetric("V1/NodeStats/ThreadPool/Bulk/Rejected", "threads/second", nodeName,
+                        nodeStats.thread_pool.bulk.rejected);
+            }
 
             // Warmer
             // Component/V1/NodeStats/ThreadPool/Warmer/Completed/*

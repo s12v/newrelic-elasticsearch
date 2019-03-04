@@ -3,8 +3,12 @@ services:
   es24:
     image: elasticsearch:2.4
     ports:
-    - "9200:9200"
+    - "9224:9200"
   es5:
     image: elasticsearch:5-alpine
     ports:
-    - "9200:9200"
+    - "9205:9200"
+  es66:
+    image: elasticsearch:6.6.1
+    ports:
+    - "9266:9200"

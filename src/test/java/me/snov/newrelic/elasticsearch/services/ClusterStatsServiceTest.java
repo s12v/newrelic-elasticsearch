@@ -31,7 +31,7 @@ public class ClusterStatsServiceTest {
 
     @Test
     public void testGetNumberOfVersionsInCluster() throws Exception {
-        ClusterStats clusterStats = parseJson("/resources/cluster_stats_version_mismatch.json");
+        ClusterStats clusterStats = parseJson("/cluster_stats_version_mismatch.json");
         assertEquals(2, clusterStatsService.getNumberOfVersionsInCluster(clusterStats));
     }
 }
