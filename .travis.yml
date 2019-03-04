@@ -9,11 +9,6 @@ env:
   - ELASTICSEARCH_VERSION="2.4-alpine"
   - ELASTICSEARCH_VERSION="5-alpine"
   - ELASTICSEARCH_VERSION="6.6.1"
-  - ELASTICSEARCH_VERSION="latest"
-
-matrix:
-  allow_failures:
-    - env: ELASTICSEARCH_VERSION="latest"
 
 jdk:
   - openjdk8
