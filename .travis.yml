@@ -1,5 +1,6 @@
-sudo: required
 dist: trusty
+
+sudo: required
 
 language: java
 
@@ -27,7 +28,7 @@ after_success:
 deploy:
     provider: releases
     api-key:
-      secure: "R8Q/pW53GXC3fHVIe3fqhvweukdJNph0mtCV3vnMLj3Vrt8V33l8DgKvGfxrwh+bsd/v1lr01K5/rWijDsrWMd/8boAVcsJCIYwVS3C6dPxEb0lww5oThl1EHHM3/wM4FQLefbK8/KnTK8qWGSQmwLsX1M+Ehdy4QU9SfO28Ks4="
+      secure: fNp7Sv3SEjb5XzhZsCn7ub8qzMtSU/HmNVu2kolxLoLykbqRTvtn3+0SNT3x5urb12akZ+PrN6QlBvBLWBClhFaJDJ6XvGMs60ZIwpvmkBKAftKH1c6GNWjo8kdxvkawvQJNy8KDPh7GbzdjbTJ7J16eCdWQnWVyoNKubEuyiPA=
     file: "$(ls $TRAVIS_BUILD_DIR/build/distributions/newrelic-elasticsearch-plugin*.tar.gz | head -n 1)"
     skip_cleanup: true
     on:
